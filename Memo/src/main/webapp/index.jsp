@@ -8,12 +8,12 @@
 </head>
 <body>
 	<h1>메인페이지</h1>
-	
+
 	<hr> 
 	
 	<h2>김용제</h2>
 	<input>
 	<button>클릭</button>
-	
+
 </body>
 </html>

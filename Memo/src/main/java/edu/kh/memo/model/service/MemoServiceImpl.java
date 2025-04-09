@@ -1,5 +1,5 @@
 package edu.kh.memo.model.service;
 
-public class MemoServiceImpl {
+public class MemoServiceImpl implements MemoService {
 
 }

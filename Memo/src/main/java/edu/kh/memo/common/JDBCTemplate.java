@@ -7,15 +7,16 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
 
+
 public class JDBCTemplate {
 	
 	// 필드
 	private static Connection conn = null;
 	// -> static 메서드에서 사용할 static 필드 선언
 	
-	// 메서드
 	
-	/** 호출 시 Connection 객체를 생성해서 반환하는 메서드 AutoCommit 끄기
+	// 메서드
+	/** 호출 시 Connection 객체를 생성해서 반환하는 메서드 + AutoCommit 끄기
 	 * @return conn
 	 */
 	public static Connection getConnection() {
@@ -25,40 +26,44 @@ public class JDBCTemplate {
 			// 이전에 참조하던 Connection 객체가 존재하고
 			// 아직 close() 된 상태가 아니라면
 			// 새로 만들지 않고 기존 Connection 반환
-			if(conn != null && !conn.isClosed()) {
+			// conn.isClosed() 닫혔다면 ! 붙어야 닫히지 않았다면			
+			if( conn != null && !conn.isClosed() ) {
 				return conn;
 			}
 			
 			// 1. Properties 객체 생성
 			Properties prop = new Properties();
 			
-			// 2. Properties가 제공하는 메서드를 이용해서 driver.xml 파일 내용 읽어오기
-			// src/main/resources 경로상에 위치한 drive.xml 파일 읽어오기
-			String filePath = JDBCTemplate.class.getResource("/xml/driver.xml").getPath();
+			// 2. Properties가 제공하는 메서드를 이용해서 driver.xml 파일 내용을 읽어오기
+			// stc/main/resources 경로상에 위치한 driver.xml 파일 읽어오기
+			String filepath = JDBCTemplate.class.getResource("/xml/driver.xml").getPath();
 			// JDBCTemplate.class.getResource("경로") :
-			// * 클래스패스(classpath) 내에서 지정된 리소스 파일을 찾는 메서드
-			
+			//	* 클래스패스(class path) 내에서 지정된 리소스 파일을 찾는 메서드	
+						
 			// * classpath란?
-			//	 Java 프로그램이 클래스를 찾기 위해 검색하는 경로를 의미
+			// Java 프로그램이 클래스를 찾기 위해 검색하는 경로를 의미
 			// -> src/main/resources 또는 WEB-INF/classes 에서 찾음
 			
-			// getPath() : URL 객체에서 실제 파일 시스템의 경로를 절대경로 방법으로 얻어옴. 
+			// getPath(); : URL 객체에서 실제 파일 시스템의 경로를 절대경로 방법으로 얻어옴
 			
-			System.out.println(filePath);
+			System.out.println(filepath);
 			
-			prop.loadFromXML(new FileInputStream(filePath));
+			prop.loadFromXML(new FileInputStream(filepath));
 			
 			// 3. prop에 저장된 값을 이용해서 Connection 객체 생성
 			Class.forName(prop.getProperty("driver"));
+			// Class.forName(prop)
 			
 			conn = DriverManager.getConnection(prop.getProperty("url"),
-												prop.getProperty("userName"),
-												prop.getProperty("password"));
-			// 4. 만들어진 Connection에서 AutoCommit 끄기
+											  prop.getProperty("userName"),
+											  prop.getProperty("password"));
 			
+			// conn = DriverManager.getConnection(url, userName, password);
+			
+			// 만들어진 Connection 에서 AutoCommit 끄기
 			conn.setAutoCommit(false);
 			
-		} catch (Exception e) {
+		}catch (Exception e) {
 			System.out.println("커넥션 생성 중 예외 발생..");
 			e.printStackTrace();
 		}
@@ -67,9 +72,9 @@ public class JDBCTemplate {
 		
 	}
 	
-	// -------------------------------------------------------------
+	// ------------------------------------------------
 	
-	/** 전달 받은 커넥션에서 수행한 SQL을 Commit 하는 메서드
+	/** 전달 받은 커넥션에서 수행한 sql을 Commit하는 메서드
 	 * @param conn
 	 */
 	public static void commit(Connection conn) {
@@ -83,27 +88,24 @@ public class JDBCTemplate {
 		}
 		
 	}
-	
-	/** 전달 받은 커넥션에서 수행한 SQL을 Rollback 하는 메서드
+	/** 전달 받은 커넥션에서 수행한 sql을 ROLLBACK 하는 메서드
 	 * @param conn
 	 */
 	public static void rollback(Connection conn) {
 		
 		try {
-			if(conn != null && !conn.isClosed()) conn.rollback();
-				
-		} catch (Exception e) {
+			if(conn != null && !conn.isClosed()) conn.commit();
+		}catch (Exception e) {
 			System.out.println("롤백 중 예외 발생");
 			e.printStackTrace();
 		}
 		
 	}
+	// --------------------------------------------------------
 	
-	// -------------------------------------------------------------
+	// 커넥션, Statement(PreparedStatement), ResultSet
 	
-	// 커넥션, Statement(PrepareStatement), ResultSet
-	
-	/** 전달 받은 커넥션을 close(자원 반환) 하는 메서드
+	/** 전달받은 커넥션을 close(자원 반환) 하는 메서드
 	 * @param conn
 	 */
 	public static void close(Connection conn) {
@@ -111,16 +113,16 @@ public class JDBCTemplate {
 		try {
 			if(conn != null && !conn.isClosed()) conn.close();
 			
-		} catch (Exception e) {
-			System.out.println("커넥션 close() 중 예외 발생");
+		}catch (Exception e) {
+			System.out.println("커넥션 close() 중 예외발생");
 			e.printStackTrace();
 		}
 		
 	}
 	
-	/** 전달 받은 Statement or PrepareStatement 둘 다 close()하는 메서드
-	 * 	+ 다형성의 업캐스팅 적용
-	 * 	-> PrepareStatement는 Statement의 자식
+	/** 전달 받은 Statement or PreparedStatement 둘 다 close()하는 메서드
+	 * + 다형성의 업캐스팅 적용
+	 * -> PreparedStatement는 Statement 의 자식
 	 * @param stmt
 	 */
 	public static void close(Statement stmt) {
@@ -128,26 +130,28 @@ public class JDBCTemplate {
 		try {
 			if(stmt != null && !stmt.isClosed()) stmt.close();
 			
-		} catch (Exception e) {
+		}catch (Exception e) {
 			System.out.println("Statement close()중 예외 발생");
 			e.printStackTrace();
 		}
 		
 	}
 	
-	/** 전달 받은 ResultSet을 Close()하는 메서드
+	/** 전달 받은 ResultSet을 close() 하는 메서드
 	 * @param rs
 	 */
 	public static void close(ResultSet rs) {
 		
 		try {
 			if(rs != null && !rs.isClosed()) rs.close();
-			
-		} catch (Exception e) {
+		}catch (Exception e) {
 			System.out.println("ResultSet close()중 예외 발생");
 			e.printStackTrace();
 		}
 		
 	}
 	
+	
+	// 난 제일 마지막에 주석을 썼지 재석
+
 }

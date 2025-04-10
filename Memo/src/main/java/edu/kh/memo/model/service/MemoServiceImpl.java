@@ -25,6 +25,21 @@ public class MemoServiceImpl implements MemoService {
 		
 		return result;
 	}
+
+	@Override
+	public int memberUpdate(String memberId, String memberPw, int memberNo) throws Exception {
+
+		Connection conn = getConnection();
+		
+		int result = memoDAO.memberUpdate(conn, memberNo, memberId, memberPw);
+		
+		if(result > 0) commit(conn);
+		else 		 rollback(conn);
+		
+		close(conn);
+		
+		return 0;
+	}
 	
 
 }

@@ -40,4 +40,28 @@ public class MemoDAOImpl implements MemoDAO {
 		return result;
 	}
 
+	@Override
+	public int memberUpdate(Connection conn, int memberNo, String memberId, String memberPw) throws Exception {
+
+		int result = 0;
+
+		try {
+
+			String sql = prop.getProperty("memberUpdate");
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, memberPw);
+			pstmt.setInt(3, memberNo);
+
+			result = pstmt.executeUpdate();
+
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
+	}
+
 }

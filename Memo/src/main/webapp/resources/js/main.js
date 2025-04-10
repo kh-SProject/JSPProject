@@ -19,18 +19,5 @@ function loadMemos() {
   });
 }
 
-function login() {
-  const username = document.getElementById("username").value;
-  if (username) {
-    document.getElementById("loginForm").style.display = "none";
-    document.getElementById("welcomeMessage").style.display = "block";
-    document.getElementById("userWelcome").innerText = `${username}님, 환영합니다!`;
-  }
-}
-
-function logout() {
-  document.getElementById("loginForm").style.display = "flex";
-  document.getElementById("welcomeMessage").style.display = "none";
-}
 
 window.onload = loadMemos;

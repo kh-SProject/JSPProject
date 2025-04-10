@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.Properties;
 
 import edu.kh.memo.common.JDBCTemplate;
+import edu.kh.memo.model.dto.Member;
 
 public class MemoDAOImpl implements MemoDAO {
 
@@ -62,6 +63,35 @@ public class MemoDAOImpl implements MemoDAO {
 		}
 
 		return result;
+	}
+
+	@Override
+	public Member login(Connection conn, String memberId, String memberPw) throws Exception {
+
+		Member member = null;
+
+		try {
+			String sql = prop.getProperty("loginMember");
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, memberPw);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				member = Member.builder().memberNo(rs.getInt("MEMBER_NO")).memberId(rs.getString("MEMBER_ID"))
+						.memberPw("MEMBER_PW").memberName(rs.getString("MEMBER_NAME")).build();
+
+			}
+
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return member;
 	}
 
 }

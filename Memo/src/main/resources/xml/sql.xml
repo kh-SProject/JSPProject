@@ -16,4 +16,11 @@
 		WHERE MEMBER_NO = ?
 	</entry>
 	
+	<entry key="loginMember">
+		SELECT *
+		FROM TB_MEMBER
+		WHERE MEMBER_ID = ?
+	    AND MEMBER_PW = ?
+	</entry>
+	
 </properties>

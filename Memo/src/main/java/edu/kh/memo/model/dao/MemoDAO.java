@@ -8,4 +8,6 @@ public interface MemoDAO {
 
 	int memberUpdate(Connection conn, int memberNo, String memberId, String memberPw) throws Exception;
 
+	int memoAdd(Connection conn, String memoTitle, String memoDetail) throws Exception;
+
 }

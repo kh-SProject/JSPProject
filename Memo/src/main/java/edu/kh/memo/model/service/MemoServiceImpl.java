@@ -45,6 +45,7 @@ public class MemoServiceImpl implements MemoService {
 		close(conn);
 
 		return member;
+
 	}
 
 	public MemoList selectOne(int memoNo) throws Exception {
@@ -61,17 +62,18 @@ public class MemoServiceImpl implements MemoService {
 	public int memoDelete(int memo) throws Exception {
 		Connection conn = getConnection();
 
-		int result = memoDAO.memoDelete(conn, memo);
-
-		if (result > 0)
-			commit(conn);
-		else
-			rollback(conn);
-
+		
+		int result =  memoDAO.memoDelete(conn, memo);
+		
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		
 		close(conn);
-
+		
 		return result;
+    
 	}
+		
 
 	public int memoAdd(String memoTitle, String memoDetail) throws Exception {
 
@@ -88,4 +90,9 @@ public class MemoServiceImpl implements MemoService {
 
 		return result;
 	}
+
+	
 }
+
+}
+

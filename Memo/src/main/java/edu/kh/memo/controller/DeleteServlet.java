@@ -44,7 +44,8 @@ public class DeleteServlet extends HttpServlet{
 		resp.sendRedirect("/");
 		
 		
-	} catch (Exception e) {
-		e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

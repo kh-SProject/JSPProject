@@ -25,7 +25,7 @@
   </div>
 
   <form action="/memo/add" method="post">
-    <button>글쓰기</button>
+    <button id="addBtn">글쓰기</button>
   </form>
 
 </div>
@@ -99,22 +99,26 @@
   <div id="authSection" class="login-area">
     <c:choose>
 
-      <c:when test="${empty sessionScope.user}">
+         <c:when test="${empty sessionScope.user}">
         <div id="welcomeMessage">
           <p class="welcome">${sessionScope.user}님, 환영합니다!</p>
           <p>즐겁고 행복한 순간이 있다면 메모로 남겨보세요 :)</p>
           <form action="/logout" method="post">
+             <p>로그인해주세요:)</p>
+          </form>
+          </div>
+          </c:when>
 
       <c:when test="${not empty sessionScope.user}">
         <div id="welcomeMessage">
           <p class="welcome">${sessionScope.user}님, 환영합니다!</p>
           <p>즐겁고 행복한 순간이 있다면 메모로 남겨보세요 :)</p>
           <form action="logout.jsp" method="post">
-
             <button type="submit">로그아웃</button>
           </form>
         </div>
       </c:when>
+      
       <c:otherwise>
         <div id="loginForm">
 

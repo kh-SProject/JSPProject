@@ -143,7 +143,9 @@ public class MemoDAOImpl implements MemoDAO {
 		} finally {
 
 			JDBCTemplate.close(pstmt);
-      
+		}
+		
+		return result;
      }
   
   @Override
@@ -168,3 +170,5 @@ public class MemoDAOImpl implements MemoDAO {
 		
 		return result;
 	}
+
+}

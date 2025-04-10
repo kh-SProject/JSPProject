@@ -27,11 +27,9 @@
             남습니다.
          </p>
       </div>
-
-      <form action="/memo/add" method="post">
-         <button>글쓰기</button>
-      </form>
-
+     
+         <button id="addBtn">글쓰기</button>
+     
    </div>
 
    <div class="container">
@@ -50,6 +48,7 @@
          <tbody>
             <c:forEach var="memo" items="${memoList}">
                <tr>
+
 					<td>${memo.memoNo}</td>
 					<td>
 					  <c:choose>
@@ -113,6 +112,7 @@
          <c:if test="${not empty sessionScope.member}">
 
             <div id="welcomeMessage">
+
 					<p class="welcome">${sessionScope.member.memberName}님,환영합니다!</p>
 					<p>즐겁고 행복한 순간이 있다면 메모로 남겨보세요 :)</p>
 					<form action="/logout" method="post">
@@ -123,7 +123,6 @@
 						<button type="submit">회원정보수정</button>
 					</form>
 				</div>
-
          </c:if>
       </div>
    </div>
@@ -142,9 +141,6 @@
       <%-- message를 한 번만 출력하고 제거 --%>
       <c:remove var="message" scope="session"></c:remove>
    </c:if>
-
-
-
 
    <script src="/resources/js/main.js"></script>
 </body>

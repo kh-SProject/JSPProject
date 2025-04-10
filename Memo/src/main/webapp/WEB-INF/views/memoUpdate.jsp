@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+	<link rel="stylesheet" href="/Memo/src/main/webapp/resources/css/memoUpdate.css">
 </head>
 <body>
 
@@ -16,12 +18,12 @@
 
 
 	<!-- value 값은 조회서블릿이 완료된 뒤 넣을 수 있음 -->
-	<form>
+	<form action="/memo/update" method="post">
 		<div>
-			<input type="text" name="memoTitle" value="${memoList.memoTitle}">
+			<input type="text" name="memoTitle" value="${memoList.memoTitle}" required>
 		</div>
 		<div>
-			<textarea rows="3" cols="50" name="memoDetail">${memoList.memoDetail}</textarea>
+			<textarea name="memoDetail" required>${memoList.memoDetail}</textarea>
 		</div>
 		
 		<input type="hidden" name="memoNo" value="${memoList.memoNo}">
@@ -38,8 +40,12 @@
 			// 2순위 : Front(HTML/CSS/JS)
 		</script>
 		
-		<%-- message를 한 번만 출력하고 제거 --%>
-		<c:remove var="message" scope="session"></c:remove>
+		<c:if test="${not empty sessionScope.message}">
+    <script>
+        alert("${message}");
+    </script>
+    <c:remove var="message" scope="session" />
+		</c:if>
 	</c:if>
 
 </body>

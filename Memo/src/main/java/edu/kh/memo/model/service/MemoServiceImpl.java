@@ -27,14 +27,7 @@ public class MemoServiceImpl implements MemoService {
 	}
 
 	@Override
-	public MemoList memoDetail(int memoNO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public int memoDelete(int memo) throws Exception {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 	

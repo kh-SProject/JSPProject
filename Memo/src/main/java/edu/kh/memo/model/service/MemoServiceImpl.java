@@ -1,8 +1,13 @@
 package edu.kh.memo.model.service;
 
+import static edu.kh.memo.common.JDBCTemplate.close;
+import static edu.kh.memo.common.JDBCTemplate.commit;
+import static edu.kh.memo.common.JDBCTemplate.getConnection;
+import static edu.kh.memo.common.JDBCTemplate.rollback;
+
 import java.sql.Connection;
 
-import static edu.kh.memo.common.JDBCTemplate.*;
+import edu.kh.memo.common.JDBCTemplate;
 import edu.kh.memo.model.dao.MemoDAO;
 import edu.kh.memo.model.dao.MemoDAOImpl;
 import edu.kh.memo.model.dto.MemoList;
@@ -27,9 +32,18 @@ public class MemoServiceImpl implements MemoService {
 	}
 
 	@Override
-
-		return 0;
+	public MemoList selectOne(int memoNo) throws Exception {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+	    MemoList memo = memoDAO.selectOne(conn, memoNo);
+	    
+	    JDBCTemplate.close(conn);
+	    
+	    return memo;
 	}
+
+	
 	
 
 }

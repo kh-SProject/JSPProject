@@ -15,4 +15,47 @@ public class MemoList {
 	private String memoDetail;
 	private String memoDate;
 	private String memoUpdate;
+	
+	
+	  public int getMemoNo() {
+	        return memoNo;
+	    }
+
+	    public void setMemoNo(int memoNo) {
+	        this.memoNo = memoNo;
+	    }
+
+	    public String getMemoTitle() {
+	        return memoTitle;
+	    }
+
+	    public void setMemoTitle(String memoTitle) {
+	        this.memoTitle = memoTitle;
+	    }
+
+	    public String getMemoDetail() {
+	        return memoDetail;
+	    }
+
+	    public void setMemoDetail(String memoDetail) {
+	        this.memoDetail = memoDetail;
+	    }
+
+	    public String getMemoDate() {
+	        return memoDate;
+	    }
+
+	    public void setMemoDate(String memoDate) {
+	        this.memoDate = memoDate;
+	    }
+
+	    public String getMemoUpdate() {
+	        return memoUpdate;
+	    }
+
+	    public void setMemoUpdate(String memoUpdate) {
+	        this.memoUpdate = memoUpdate;
+	    }
+	
 }
+

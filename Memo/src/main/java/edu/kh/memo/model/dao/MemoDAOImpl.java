@@ -1,17 +1,19 @@
 package edu.kh.memo.model.dao;
 
+import static edu.kh.memo.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import edu.kh.memo.common.JDBCTemplate;
 import edu.kh.memo.model.dto.Member;
 import edu.kh.memo.model.dto.MemoList;
-
-import static edu.kh.memo.common.JDBCTemplate.*;
 
 public class MemoDAOImpl implements MemoDAO {
 
@@ -122,24 +124,31 @@ public class MemoDAOImpl implements MemoDAO {
 	@Override
 	public MemoList selectOne(Connection conn, int memoNo) throws Exception {
 
-		MemoList memo = null;
+	    MemoList memo = null;
 
-		String sql = "SELECT * FROM TB_MEMO WHERE MEMO_NO = ?";
+	    try {
+	        String sql = prop.getProperty("selectOneMemo");
 
-		PreparedStatement pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, memoNo);
-		ResultSet rs = pstmt.executeQuery();
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setInt(1, memoNo);
+	        rs = pstmt.executeQuery();
 
-		if (rs.next()) {
-			memo = MemoList.builder().memoNo(rs.getInt("MEMO_NO")).memoTitle(rs.getString("MEMO_TITLE"))
-					.memoDetail(rs.getString("MEMO_DETAIL")).memoDate(rs.getString("MEMO_DATE"))
-					.memoUpdate(rs.getString("MEMO_UPDATE")).build();
-		}
+	        if (rs.next()) {
+	            memo = MemoList.builder()
+	                .memoNo(rs.getInt("MEMO_NO"))
+	                .memoTitle(rs.getString("MEMO_TITLE"))
+	                .memoDetail(rs.getString("MEMO_DETAIL"))
+	                .memoDate(rs.getString("MEMO_DATE"))
+	                .memoUpdate(rs.getString("MEMO_UPDATE"))
+	                .build();
+	        }
 
-		rs.close();
-		pstmt.close();
+	    } finally {
+	        close(rs);
+	        close(pstmt);
+	    }
 
-		return memo;
+	    return memo;
 	}
 
 	@Override
@@ -163,7 +172,11 @@ public class MemoDAOImpl implements MemoDAO {
 
 		}
 		return result;
-	}
+
+ }
+  
+
+
 
 	@Override
 	public int memoAdd(Connection conn, String memoTitle, String memoDetail) throws Exception {
@@ -203,13 +216,43 @@ public class MemoDAOImpl implements MemoDAO {
 			pstmt.setString(2, memberPw);
 			pstmt.setInt(3, memberNo);
 
-			result = pstmt.executeUpdate();
-		
-			
+      result = pstmt.executeUpdate();
+      
 		}finally {
 			close(pstmt);
 		}
 		
 		return result;
 	}
+      
+	public List<MemoList> selectByMemberNo(Connection conn, int memberNo) throws Exception {
+		  List<MemoList> list = new ArrayList<>();
+
+		    try {
+		        String sql = prop.getProperty("selectByMemberNo");
+
+		        pstmt = conn.prepareStatement(sql);
+		        pstmt.setInt(1, memberNo);
+
+		        rs = pstmt.executeQuery();
+
+		        while (rs.next()) {
+		            MemoList memo = MemoList.builder()
+		                .memoNo(rs.getInt("MEMO_NO"))
+		                .memoTitle(rs.getString("MEMO_TITLE"))
+		                .memoDetail(rs.getString("MEMO_DETAIL"))
+		                .memoDate(rs.getString("MEMO_DATE"))
+		                .memoUpdate(rs.getString("MEMO_UPDATE"))
+		                .build();
+
+		            list.add(memo);
+		        }
+
+		    } finally {
+		        close(rs);
+		        close(pstmt);
+		    }
+		    return list;
+	}
+
 }

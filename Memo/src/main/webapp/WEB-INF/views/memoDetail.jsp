@@ -27,15 +27,10 @@
         <button type="submit" class="edit-btn">✏ 수정</button>
       </form>
 
-      <form action="/memo/delete" method="post" onsubmit="return confirm('정말 삭제할까요?');">
-        <input type="hidden" name="no" value="${memo.memoNo}">
-        <button type="submit" class="delete-btn">🗑 삭제</button>
-      </form>
+        <button id="deleteBtn">🗑 삭제</button>
     </div>
   </div>
 
   <script src="/resources/js/memoDetail.js"></script>
-
 </body>
 </html>
-

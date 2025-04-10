@@ -36,10 +36,10 @@ header {
 
 .banner .text-box {
   position: absolute;
-  bottom: 40%; 
+  bottom: 30%; 
   right: 10%;
   text-align: right;
-  color: #111; /* 기본 글자색 */
+  color: #111; 
 }
 
 .banner .text-box h2 {
@@ -55,21 +55,7 @@ header {
   color: #333;
 }
 
-.banner button {
-  position: absolute;
-  bottom: 30%; 
-  right: 10%;
-  text-align: right;
-
-  padding: 10px 20px;
-  background-color: royalblue;
-  border: none;
-  color: white;
-  cursor: pointer;
-}
-
 .highlight {
-  color: red;
   font-weight: bold;
 }
 

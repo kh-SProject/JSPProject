@@ -7,6 +7,9 @@ import static edu.kh.memo.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 
+
+import edu.kh.memo.common.JDBCTemplate;
+
 import edu.kh.memo.model.dao.MemoDAO;
 import edu.kh.memo.model.dao.MemoDAOImpl;
 
@@ -30,6 +33,18 @@ public class MemoServiceImpl implements MemoService {
 	}
 
 	@Override
+	public MemoList selectOne(int memoNo) throws Exception {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+	    MemoList memo = memoDAO.selectOne(conn, memoNo);
+	    
+	    JDBCTemplate.close(conn);
+	    
+	    return memo;
+	}
+
+	
 	public int memoDelete(int memo) throws Exception {
 		Connection conn = getConnection();
 		

@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
 
+
+import edu.kh.memo.common.JDBCTemplate;
+import edu.kh.memo.model.dto.MemoList;
+
 import static edu.kh.memo.common.JDBCTemplate.*;
 
 public class MemoDAOImpl implements MemoDAO {
@@ -63,6 +67,35 @@ public class MemoDAOImpl implements MemoDAO {
 
 		return result;
 	}
+
+	
+	@Override
+	public MemoList selectOne(Connection conn, int memoNo) throws Exception {
+		
+		MemoList memo = null;
+
+	    String sql = "SELECT * FROM TB_MEMO WHERE MEMO_NO = ?";
+
+	    PreparedStatement pstmt = conn.prepareStatement(sql);
+	    pstmt.setInt(1, memoNo);
+	    ResultSet rs = pstmt.executeQuery();
+
+	    if (rs.next()) {
+	    	memo = MemoList.builder()
+	    		    .memoNo(rs.getInt("MEMO_NO"))
+	    		    .memoTitle(rs.getString("MEMO_TITLE"))
+	    		    .memoDetail(rs.getString("MEMO_DETAIL"))
+	    		    .memoDate(rs.getString("MEMO_DATE"))
+	    		    .memoUpdate(rs.getString("MEMO_UPDATE"))
+	    		    .build();
+	    }
+
+	    rs.close();
+	    pstmt.close();
+
+	    return memo;
+	}
+}
 
 	@Override
 	public int memoDelete(Connection conn, int memo) throws Exception {

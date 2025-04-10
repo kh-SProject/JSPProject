@@ -8,7 +8,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Memo is Best</title>
-  <link rel="stylesheet" href="/resources/css/main.css" />
+
+  <link rel="stylesheet" href="/resources/css/main.css"/>
+
 </head>
 <body>
 
@@ -21,6 +23,11 @@
     <p>잊지 말고, <span class="highlight">적어보세요.</span><br>
        당신의 순간은 메모로 오래 남습니다.</p>
   </div>
+
+  <form action="/memo/add" method="post">
+    <button>글쓰기</button>
+  </form>
+
 </div>
 
 <div class="container">
@@ -45,7 +52,8 @@
         <td>
           <c:choose>
             <c:when test="${not empty sessionScope.loginMember}">
-              <a href="memoDetail?no=${memo.no}" target="_blank">${memo.title}</a>
+             <a href="memo/detail?no=${memo.no}" target="_blank">${memo.title}</a>
+              
             </c:when>
             <c:otherwise>
               ${memo.title}
@@ -90,21 +98,36 @@
   <!-- 로그인 / 환영 메시지 -->
   <div id="authSection" class="login-area">
     <c:choose>
+
       <c:when test="${empty sessionScope.user}">
         <div id="welcomeMessage">
           <p class="welcome">${sessionScope.user}님, 환영합니다!</p>
           <p>즐겁고 행복한 순간이 있다면 메모로 남겨보세요 :)</p>
           <form action="/logout" method="post">
+
+      <c:when test="${not empty sessionScope.user}">
+        <div id="welcomeMessage">
+          <p class="welcome">${sessionScope.user}님, 환영합니다!</p>
+          <p>즐겁고 행복한 순간이 있다면 메모로 남겨보세요 :)</p>
+          <form action="logout.jsp" method="post">
+
             <button type="submit">로그아웃</button>
           </form>
         </div>
       </c:when>
       <c:otherwise>
         <div id="loginForm">
+
           <form action="/login" method="post">
             <input type="text" name="memberId" placeholder="아이디" required />
             <input type="password" name="memberPw" placeholder="비밀번호" required />
             <button type="submit" id="loginBtn">로그인</button>
+
+          <form action="login.jsp" method="post">
+            <input type="text" name="username" placeholder="아이디" required />
+            <input type="password" name="password" placeholder="비밀번호" required />
+            <button type="submit">로그인</button>
+
             <button formaction="register.jsp">회원가입</button>
           </form>
         </div>
@@ -115,3 +138,4 @@
 <script src="/resources/js/main.js"></script>
 </body>
 </html>
+

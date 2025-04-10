@@ -10,5 +10,10 @@ public interface MemoService {
 	Member login(String memberId, String memberPw) throws Exception;
 
 
-	
+	MemoList selectOne(int memoNo) throws Exception;
+
+	int memoDelete(int memo) throws Exception;
+
+	int memoAdd(String memoTitle, String memoDetail) throws Exception;
+
 }

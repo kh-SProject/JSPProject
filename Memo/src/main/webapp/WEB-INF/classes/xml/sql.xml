@@ -21,6 +21,15 @@
 		FROM TB_MEMBER
 		WHERE MEMBER_ID = ?
 	    AND MEMBER_PW = ?
+
+	<entry key="memoDelete">
+		DELETE FROM TB_MEMO
+		WHERE MEMO_NO = ?
+	</entry>
+	
+	<entry key="memoAdd">
+		INSERT INTO TB_MEMO
+		VALUES(SEQ_TODO_NO.NEXTVAL, ?, ?, DEFAULT, DEFAULT)
 	</entry>
 	
 </properties>

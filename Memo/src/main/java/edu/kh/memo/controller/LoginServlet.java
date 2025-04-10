@@ -34,7 +34,10 @@ public class LoginServlet extends HttpServlet {
 				return;
 			}
 
-			req.setAttribute("member", member.getMemberName() + "님 환영하세요.");
+			
+			HttpSession session = req.getSession();
+			session.setAttribute("member", member);
+			session.setAttribute("message", member.getMemberName() + "님 환영하세요.");
 			resp.sendRedirect("/");
 
 		} catch (Exception e) {

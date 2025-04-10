@@ -1,11 +1,11 @@
 package edu.kh.memo.model.dao;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
-
 
 import edu.kh.memo.common.JDBCTemplate;
 import edu.kh.memo.model.dto.Member;
@@ -20,6 +20,25 @@ public class MemoDAOImpl implements MemoDAO {
 	private ResultSet rs;
 
 	private Properties prop;
+	
+
+	// TodoListDAOImpl 생성자 /xml/sql.xml 경로 읽어오기
+	public MemoDAOImpl() {
+		// TodoListDAOImpl 객체가 생성 될 때 (Service 단에서 new 연산자를 통해 객체화 될 때)
+		// sql.xml 파일의 내용을 읽어와 Properties prop 객체에 K:V 세팅		 
+		try {
+			String filePath = MemoDAOImpl.class.getResource("/xml/sql.xml").getPath();
+		
+			prop = new Properties();
+			prop.loadFromXML(new FileInputStream(filePath));
+		
+		} catch (Exception e) {
+			System.out.println("sql.xml 로드 중 예외발생");
+			e.printStackTrace();
+		}
+	
+	}
+	
 
 	@Override
 	public int memoUpdate(Connection conn, int memoNo, String memoTitle, String memoDetail) throws Exception {
@@ -84,10 +103,12 @@ public class MemoDAOImpl implements MemoDAO {
 
 			rs = pstmt.executeQuery();
 
-			while (rs.next()) {
+			if (rs.next()) {
 
-				member = Member.builder().memberNo(rs.getInt("MEMBER_NO")).memberId(rs.getString("MEMBER_ID"))
-						.memberPw("MEMBER_PW").memberName(rs.getString("MEMBER_NAME")).build();
+				member = Member.builder()
+						.memberNo(rs.getInt("MEMBER_NO"))
+						.memberId(rs.getString("MEMBER_ID"))
+						.memberName(rs.getString("MEMBER_NAME")).build();
 
 			}
 
@@ -100,75 +121,82 @@ public class MemoDAOImpl implements MemoDAO {
 
 	@Override
 	public MemoList selectOne(Connection conn, int memoNo) throws Exception {
-		
+
 		MemoList memo = null;
 
-	    String sql = "SELECT * FROM TB_MEMO WHERE MEMO_NO = ?";
+		String sql = "SELECT * FROM TB_MEMO WHERE MEMO_NO = ?";
 
-	    PreparedStatement pstmt = conn.prepareStatement(sql);
-	    pstmt.setInt(1, memoNo);
-	    ResultSet rs = pstmt.executeQuery();
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, memoNo);
+		ResultSet rs = pstmt.executeQuery();
 
-	    if (rs.next()) {
-	    	memo = MemoList.builder()
-	    		    .memoNo(rs.getInt("MEMO_NO"))
-	    		    .memoTitle(rs.getString("MEMO_TITLE"))
-	    		    .memoDetail(rs.getString("MEMO_DETAIL"))
-	    		    .memoDate(rs.getString("MEMO_DATE"))
-	    		    .memoUpdate(rs.getString("MEMO_UPDATE"))
-	    		    .build();
-	    }
+		if (rs.next()) {
+			memo = MemoList.builder().memoNo(rs.getInt("MEMO_NO")).memoTitle(rs.getString("MEMO_TITLE"))
+					.memoDetail(rs.getString("MEMO_DETAIL")).memoDate(rs.getString("MEMO_DATE"))
+					.memoUpdate(rs.getString("MEMO_UPDATE")).build();
+		}
 
-	    rs.close();
-	    pstmt.close();
+		rs.close();
+		pstmt.close();
 
-	    return memo;
+		return memo;
 	}
 
 	@Override
 	public int memoDelete(Connection conn, int memo) throws Exception {
 
 		int result = 0;
-		
+
 		try {
-			
+
 			String sql = prop.getProperty("memoDelete");
-			
+
 			pstmt = conn.prepareStatement(sql);
-			
+
 			pstmt.setInt(1, memo);
-			
+
 			result = pstmt.executeUpdate();
-			
+
 		} finally {
 
 			JDBCTemplate.close(pstmt);
+
 		}
 		
 		return result;
      }
   
-  @Override
+
+
+
+		}
+
+	}
+
+	@Override
+
 	public int memoAdd(Connection conn, String memoTitle, String memoDetail) throws Exception {
-		
+
 		int result = 0;
-		
+
 		try {
 			String sql = prop.getProperty("memoAdd");
-			
+
 			pstmt = conn.prepareStatement(sql);
-			
+
 			pstmt.setString(1, memoTitle);
 			pstmt.setString(2, memoDetail);
-			
+
 			result = pstmt.executeUpdate();
-			
-		}finally {
-			
+
+		} finally {
+
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
+
+
 
 }

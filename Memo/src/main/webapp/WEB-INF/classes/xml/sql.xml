@@ -33,4 +33,20 @@
 		VALUES(SEQ_TODO_NO.NEXTVAL, ?, ?, DEFAULT, DEFAULT)
 	</entry>
 
+	<entry key="selectByMemberNo">
+  		 SELECT MEMO_NO, MEMO_TITLE, MEMO_DETAIL, 
+         TO_CHAR(MEMO_DATE, 'YYYY-MM-DD') AS MEMO_DATE, 
+         TO_CHAR(MEMO_UPDATE, 'YYYY-MM-DD') AS MEMO_UPDATE
+	     FROM TB_MEMO
+	     WHERE MEMBER_NO = ?
+	     ORDER BY MEMO_NO DESC
+	</entry>
+	
+	<entry key="selectOneMemo">
+	    SELECT MEMO_NO, MEMO_TITLE, MEMO_DETAIL, 
+	    TO_CHAR(MEMO_DATE, 'YYYY-MM-DD') AS MEMO_DATE,
+	    TO_CHAR(MEMO_UPDATE, 'YYYY-MM-DD') AS MEMO_UPDATE
+	    FROM TB_MEMO
+	    WHERE MEMO_NO = ?
+</entry>
 </properties>

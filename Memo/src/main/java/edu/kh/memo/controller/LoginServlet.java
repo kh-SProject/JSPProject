@@ -1,8 +1,10 @@
 package edu.kh.memo.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import edu.kh.memo.model.dto.Member;
+import edu.kh.memo.model.dto.MemoList;
 import edu.kh.memo.model.service.MemoService;
 import edu.kh.memo.model.service.MemoServiceImpl;
 import jakarta.servlet.ServletException;
@@ -38,7 +40,12 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = req.getSession();
 			session.setAttribute("member", member);
 			session.setAttribute("message", member.getMemberName() + "님 환영하세요.");
-			resp.sendRedirect("/");
+
+			List<MemoList> memoList = service.selectByMemberNo(member.getMemberNo());
+			req.setAttribute("memoList", memoList);
+
+			req.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(req, resp);
+
 
 		} catch (Exception e) {
 			e.printStackTrace();

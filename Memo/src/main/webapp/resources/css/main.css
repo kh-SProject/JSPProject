@@ -1,0 +1,106 @@
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Pretendard-Regular', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+}
+
+header {
+  background-color: #000;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.banner .text-box {
+  position: absolute;
+  bottom: 30%; 
+  right: 10%;
+  text-align: right;
+  color: #111; 
+}
+
+.banner .text-box h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.banner .text-box p {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.highlight {
+  font-weight: bold;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+.login-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.login-area input {
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.login-area button {
+  padding: 10px 20px;
+  background-color: royalblue;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.welcome {
+  font-weight: bold;
+  font-size: 1.1rem;
+}

@@ -19,16 +19,6 @@ function loadMemos() {
   });
 }
 
-
-const addBtn = document.querySelector("#addBtn");
-addBtn.addEventListener("click", ()=> {
-
-  location.href= "/memoAdd"
-
-});
-
-
-
 window.onload = loadMemos;
 
 const addBtn = document.querySelector("#addBtn") 

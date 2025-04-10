@@ -27,9 +27,18 @@ public class MemoServiceImpl implements MemoService {
 	}
 
 	@Override
-
-		return 0;
+	public int memoDelete(int memo) throws Exception {
+		Connection conn = getConnection();
+		
+		int result =  memoDAO.memoDelete(conn, memo);
+		
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		
+		return result;
 	}
-	
+
 
 }

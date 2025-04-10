@@ -6,6 +6,8 @@ public interface MemoService {
 
 	int memoUpdate(int memoNo, String memoTitle, String memoDetail) throws Exception;
 
+	int memoDelete(int memo) throws Exception;
+
 
 	
 }

@@ -16,4 +16,10 @@
 		WHERE MEMBER_NO = ?
 	</entry>
 	
+	<entry key="memoDelete">
+		DELETE FROM TB_MEMO
+		WHERE MEMO_NO = ?
+	</entry>
+	
+	
 </properties>

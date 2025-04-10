@@ -64,4 +64,28 @@ public class MemoDAOImpl implements MemoDAO {
 		return result;
 	}
 
+	@Override
+	public int memoDelete(Connection conn, int memo) throws Exception {
+
+		int result = 0;
+		
+		try {
+			
+			String sql = prop.getProperty("memoDelete");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memo);
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+
 }

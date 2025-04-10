@@ -1,52 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
-	<link rel="stylesheet" href="/Memo/src/main/webapp/resources/css/memoUpdate.css">
+  <meta charset="UTF-8">
+  <title>게시글 작성</title>
+  <link rel="stylesheet" href="/resources/css/main.css">
 </head>
 <body>
 
-	<!-- 메모 수정 페이지 -->
-
-	<h1>${sessionScope.loginMember}</h1>
-
-	<h4>할 일 수정</h4>
-
-
-	<!-- value 값은 조회서블릿이 완료된 뒤 넣을 수 있음 -->
-	<form action="/memo/update" method="post">
-		<div>
-			<input type="text" name="memoTitle" value="${memoList.memoTitle}" required>
-		</div>
-		<div>
-			<textarea name="memoDetail" required>${memoList.memoDetail}</textarea>
-		</div>
-		
-		<input type="hidden" name="memoNo" value="${memoList.memoNo}">
-		
-		<button>수정완료</button>
+	<form action="/todo/update" method="post" id="updateForm">
+	  <div class="container">
+	    <label for="title">제목</label>
+	    <input type="text" id="title" name="title" value="${todo.todoTitle}">
+	
+	    <label for="content">내용</label>
+	    <textarea id="content" name="content" rows="3" cols="50" placeholder="상세 내용"></textarea>
+	
+	    <button class="submit-btn">등록</button>
+	  </div>
 	</form>
 	
-		<c:if test="${not empty sessionScope.message}">
-		<script>
-			// JS 영역
-			alert("${message}");
-			// JSP 해석순위
-			// 1순위 : Java(EL/JSTL)
-			// 2순위 : Front(HTML/CSS/JS)
-		</script>
-		
-		<c:if test="${not empty sessionScope.message}">
-    <script>
-        alert("${message}");
-    </script>
-    <c:remove var="message" scope="session" />
-		</c:if>
-	</c:if>
-
 </body>
 </html>

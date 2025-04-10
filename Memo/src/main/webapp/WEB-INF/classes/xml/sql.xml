@@ -16,4 +16,9 @@
 		WHERE MEMBER_NO = ?
 	</entry>
 	
+	<entry key="memoAdd">
+		INSERT INTO TB_MEMO
+		VALUES(SEQ_TODO_NO.NEXTVAL, ?, ?, DEFAULT, DEFAULT)
+	</entry>
+	
 </properties>

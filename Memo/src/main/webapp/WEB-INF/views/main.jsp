@@ -53,7 +53,7 @@
 					<td>
 					  <c:choose>
 					    <c:when test="${not empty sessionScope.member}">
-					      <a href="memo/detail?no=${memo.memoNo}" target="_blank">${memo.memoTitle}</a>
+					      <a href="/memo/detail?no=${memo.memoNo}" target="_blank">${memo.memoTitle}</a>
 					    </c:when>
 					    <c:otherwise>
 					      ${memo.memoTitle}

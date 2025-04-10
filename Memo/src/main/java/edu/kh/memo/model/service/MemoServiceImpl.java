@@ -30,6 +30,12 @@ public class MemoServiceImpl implements MemoService {
 	}
 
 	@Override
+	public int memoDelete(int memo) throws Exception {
+		Connection conn = getConnection();
+		
+		int result =  memoDAO.memoDelete(conn, memo);
+    
+
 	public int memoAdd(String memoTitle, String memoDetail) throws Exception {
 
 		Connection conn = getConnection();
@@ -43,5 +49,3 @@ public class MemoServiceImpl implements MemoService {
 		
 		return result;
 	}
-
-}

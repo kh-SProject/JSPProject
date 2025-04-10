@@ -21,10 +21,11 @@
     <p>잊지 말고, <span class="highlight">적어보세요.</span><br>
        당신의 순간은 메모로 오래 남습니다.</p>
   </div>
-  
+
   <form action="/memo/add" method="post">
     <button>글쓰기</button>
   </form>
+
 </div>
 
 <div class="container">
@@ -119,3 +120,4 @@
 <script src="/resources/js/main.js"></script>
 </body>
 </html>
+

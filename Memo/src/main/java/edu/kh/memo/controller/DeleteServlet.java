@@ -48,5 +48,3 @@ public class DeleteServlet extends HttpServlet{
 		e.printStackTrace();
 	}
 }
-	}
-}

@@ -58,3 +58,13 @@ button {
   background-color: #f44336;
   color: white;
 }
+
+.memo-table td:nth-child(2) {
+
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.memo-table tr:nth-child(3) td {
+  height: 200px; 
+  vertical-align: top;

@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/memo/update")
+@WebServlet("/memo/edit")
 public class MemoUpdateServlet extends HttpServlet {
 
 	@Override
@@ -19,11 +19,19 @@ public class MemoUpdateServlet extends HttpServlet {
 
 		try {
 
-			int memoNO = Integer.parseInt(req.getParameter("memoNo"));
+	        String param = req.getParameter("no"); 
+
+	        if (param == null) {
+	            resp.sendRedirect("/");
+	            return;
+	        }
+
+			
+			int memoNo = Integer.parseInt(req.getParameter("param"));
 
 			MemoService service = new MemoServiceImpl();
 
-			MemoList memoList = service.selectOne(memoNO);
+			MemoList memoList = service.selectOne(memoNo);
 
 			if (memoList == null) {
 				resp.sendRedirect("/memo/detail");

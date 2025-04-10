@@ -20,6 +20,13 @@
 		DELETE FROM TB_MEMO
 		WHERE MEMO_NO = ?
 	</entry>
+
+	<entry key="loginMember">
+		SELECT *
+		FROM TB_MEMBER
+		WHERE MEMBER_ID = ?
+	    AND MEMBER_PW = ?
+	</entry>
 	
 	<entry key="memoAdd">
 		INSERT INTO TB_MEMO

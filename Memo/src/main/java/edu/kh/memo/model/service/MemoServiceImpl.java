@@ -12,6 +12,8 @@ import edu.kh.memo.common.JDBCTemplate;
 
 import edu.kh.memo.model.dao.MemoDAO;
 import edu.kh.memo.model.dao.MemoDAOImpl;
+import edu.kh.memo.model.dto.Member;
+import edu.kh.memo.model.dto.MemoList;
 
 public class MemoServiceImpl implements MemoService {
 
@@ -33,6 +35,16 @@ public class MemoServiceImpl implements MemoService {
 	}
 
 	@Override
+	public Member login(String memberId, String memberPw) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		Member member = memoDAO.login(conn, memberId, memberPw);
+		
+		close(conn);
+		
+		return member;
+
 	public MemoList selectOne(int memoNo) throws Exception {
 		
 		Connection conn = JDBCTemplate.getConnection();

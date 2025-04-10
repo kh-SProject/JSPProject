@@ -9,23 +9,26 @@
   <link rel="stylesheet" href="/resources/css/memoDetail.css">
 </head>
 <body>
+
+	<h1>나야</h1>
+
   <div class="memo-detail-container">
-    <div class="memo-title">${memo.memoTitle}</div>
+    <div class="memo-title">${memoList.memoTitle}</div>
 
     <div class="memo-content">
-      ${memo.memoDetail}
+      ${memoList.memoDetail}
     </div>
 
     <div class="memo-buttons">
       <!-- 수정 -->
       <form action="/memo/update" method="get">
-        <input type="hidden" name="no" value="${memo.memoNo}">
+        <input type="text" name="no" value="${memoList.memoNo}">
         <button type="submit">수정</button>
       </form>
 
       <!-- 삭제 -->
       <form action="/memo/delete" method="post" onsubmit="return confirmDelete();">
-        <input type="hidden" name="no" value="${memo.memoNo}">
+        <input type="hidden" name="no" value="${memoList.memoNo}">
         <button type="submit">삭제</button>
       </form>
 

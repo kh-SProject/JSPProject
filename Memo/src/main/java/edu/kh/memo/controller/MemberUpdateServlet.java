@@ -17,26 +17,26 @@ public class MemberUpdateServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		try {
-
-			int memberNo = Integer.parseInt(req.getParameter("memberNO"));
-
-			MemoService service = new MemoServiceImpl();
-
-		Member member = service.memberDetail(memberNo);
-		
-		if (member == null ) {
-			resp.sendRedirect("/member/detail");
-			return;
-		}
-		
-		req.setAttribute("member", member);
-		
-		req.getRequestDispatcher("/WEB-INF/views/userUpdate.jsp").forward(req, resp);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+////		try {
+////
+////			int memberNo = Integer.parseInt(req.getParameter("memberNO"));
+////
+////			MemoService service = new MemoServiceImpl();
+////
+////		Member member = service.memberDetail(memberNo);
+////		
+////		if (member == null ) {
+////			resp.sendRedirect("/member/detail");
+////			return;
+////		}
+////		
+////		req.setAttribute("member", member);
+////		
+////		req.getRequestDispatcher("/WEB-INF/views/userUpdate.jsp").forward(req, resp);
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 
 	}
 

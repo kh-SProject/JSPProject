@@ -10,5 +10,6 @@ public interface MemoDAO {
 
 	int memoDelete(Connection conn, int memo) throws Exception;
 
+	int memoAdd(Connection conn, String memoTitle, String memoDetail) throws Exception;
 
 }

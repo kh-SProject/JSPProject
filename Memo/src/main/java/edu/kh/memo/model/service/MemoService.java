@@ -8,6 +8,6 @@ public interface MemoService {
 
 	int memoDelete(int memo) throws Exception;
 
-
+	int memoAdd(String memoTitle, String memoDetail) throws Exception;
 	
 }

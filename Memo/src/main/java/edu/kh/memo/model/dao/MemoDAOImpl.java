@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
 
-import edu.kh.memo.common.JDBCTemplate;
+import static edu.kh.memo.common.JDBCTemplate.*;
 
 public class MemoDAOImpl implements MemoDAO {
 
@@ -33,7 +33,7 @@ public class MemoDAOImpl implements MemoDAO {
 			result = pstmt.executeUpdate();
 
 		} finally {
-			JDBCTemplate.close(pstmt);
+			close(pstmt);
 
 		}
 
@@ -58,7 +58,7 @@ public class MemoDAOImpl implements MemoDAO {
 			result = pstmt.executeUpdate();
 
 		} finally {
-			JDBCTemplate.close(pstmt);
+			close(pstmt);
 		}
 
 		return result;
@@ -82,10 +82,28 @@ public class MemoDAOImpl implements MemoDAO {
 		} finally {
 
 			JDBCTemplate.close(pstmt);
+      
+     }
+  
+  @Override
+	public int memoAdd(Connection conn, String memoTitle, String memoDetail) throws Exception {
+		
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("memoAdd");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memoTitle);
+			pstmt.setString(2, memoDetail);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			
+			close(pstmt);
 		}
 		
 		return result;
 	}
-
-
-}

@@ -162,19 +162,10 @@ public class MemoDAOImpl implements MemoDAO {
 			JDBCTemplate.close(pstmt);
 
 		}
-		
 		return result;
-     }
-  
-
-
-
-		}
-
 	}
 
 	@Override
-
 	public int memoAdd(Connection conn, String memoTitle, String memoDetail) throws Exception {
 
 		int result = 0;
@@ -198,5 +189,27 @@ public class MemoDAOImpl implements MemoDAO {
 	}
 
 
+	@Override
+	public int memberUpdate(Connection conn, String memberId, String memberPw, int memberNo) throws Exception {
 
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("memberUpdate");
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, memberPw);
+			pstmt.setInt(3, memberNo);
+
+			result = pstmt.executeUpdate();
+		
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }

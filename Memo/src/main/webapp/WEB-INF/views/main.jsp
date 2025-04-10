@@ -28,8 +28,8 @@
 			</p>
 		</div>
 
-		<form action="/memo/add" method="post">
-			<button>글쓰기</button>
+		<form action="/memo/add">
+			<button type="submit">글쓰기</button>
 		</form>
 
 	</div>
@@ -101,7 +101,6 @@
 						<input type="text" name="memberId" placeholder="아이디" required />
 						<input type="password" name="memberPw" placeholder="비밀번호" required />
 						<button type="submit" id="loginBtn">로그인</button>
-
 					</form>
 
 					<button onclick="location.href='/signup'">회원가입</button>
@@ -114,8 +113,12 @@
 				<div id="welcomeMessage">
 					<p class="welcome">${sessionScope.member.memberName}님,환영합니다!</p>
 					<p>즐겁고 행복한 순간이 있다면 메모로 남겨보세요 :)</p>
-					<form action="logout.jsp" method="post">
+					<form action="/logout" method="post">
 						<button type="submit">로그아웃</button>
+					</form>
+
+					<form action="/member/update">					
+						<button type="submit">회원정보수정</button>
 					</form>
 				</div>
 

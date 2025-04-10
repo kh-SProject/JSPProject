@@ -16,4 +16,6 @@ public interface MemoService {
 
 	int memoAdd(String memoTitle, String memoDetail) throws Exception;
 
+	int memberUpdate(String memberId, String memberPw, int memberNo) throws Exception;
+
 }

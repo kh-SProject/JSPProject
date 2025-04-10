@@ -1,26 +1,41 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>게시글 작성</title>
-  <link rel="stylesheet" href="/resources/css/main.css">
+  <title>메모 상세 보기</title>
+  <link rel="stylesheet" href="/resources/css/memoDetail.css">
 </head>
 <body>
+  <div class="memo-detail-container">
+    <div class="memo-title">${memo.memoTitle}</div>
 
-	<form action="/todo/update" method="post" id="updateForm">
-	  <div class="container">
-	    <label for="title">제목</label>
-	    <input type="text" id="title" name="title" value="${todo.todoTitle}">
-	
-	    <label for="content">내용</label>
-	    <textarea id="content" name="content" rows="3" cols="50" placeholder="상세 내용"></textarea>
-	
-	    <button class="submit-btn">등록</button>
-	  </div>
-	</form>
-	
+    <div class="memo-content">
+      ${memo.memoDetail}
+    </div>
+
+    <div class="memo-buttons">
+      <!-- 수정 -->
+      <form action="/memo/update" method="get">
+        <input type="hidden" name="no" value="${memo.memoNo}">
+        <button type="submit">수정</button>
+      </form>
+
+      <!-- 삭제 -->
+      <form action="/memo/delete" method="post" onsubmit="return confirmDelete();">
+        <input type="hidden" name="no" value="${memo.memoNo}">
+        <button type="submit">삭제</button>
+      </form>
+
+      <!-- 등록 -->
+      <form action="/memo/insert" method="get">
+        <button type="submit" class="primary">등록</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/resources/js/memoDetail.js"></script>
 </body>
 </html>

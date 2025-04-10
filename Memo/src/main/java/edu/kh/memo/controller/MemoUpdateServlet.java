@@ -23,16 +23,16 @@ public class MemoUpdateServlet extends HttpServlet {
 
 			MemoService service = new MemoServiceImpl();
 
-//			MemoList memoList = service.memoDetail(memoNO);
-//
-//			if (memoList == null) {
-//				resp.sendRedirect("/memo/detail");
-//				return;
-//			}
-//
-//			req.setAttribute("memoList", memoList);
-//
-//			req.getRequestDispatcher("/WEB-INF/views/memoUpdate.jsp").forward(req, resp);
+			MemoList memoList = service.selectOne(memoNO);
+
+			if (memoList == null) {
+				resp.sendRedirect("/memo/detail");
+				return;
+			}
+
+			req.setAttribute("memoList", memoList);
+
+			req.getRequestDispatcher("/WEB-INF/views/memoUpdate.jsp").forward(req, resp);
 
 		} catch (Exception e) {
 			e.printStackTrace();

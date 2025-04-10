@@ -6,6 +6,7 @@ import static edu.kh.memo.common.JDBCTemplate.getConnection;
 import static edu.kh.memo.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
 import edu.kh.memo.common.JDBCTemplate;
 
@@ -48,15 +49,16 @@ public class MemoServiceImpl implements MemoService {
 
 	}
 
+	@Override
 	public MemoList selectOne(int memoNo) throws Exception {
-
-		Connection conn = JDBCTemplate.getConnection();
-
-		MemoList memo = memoDAO.selectOne(conn, memoNo);
-
-		JDBCTemplate.close(conn);
-
-		return memo;
+		
+	    Connection conn = getConnection();
+	    
+	    MemoList memo = memoDAO.selectOne(conn, memoNo);
+	    
+	    close(conn);
+	    
+	    return memo;
 	}
 
 	public int memoDelete(int memo) throws Exception {
@@ -91,7 +93,32 @@ public class MemoServiceImpl implements MemoService {
 		return result;
 	}
 
-	
-}
+	@Override
+
+	public int memberUpdate(String memberId, String memberPw, int memberNo) throws Exception {
+
+		Connection conn = getConnection();
+		
+		int result = memoDAO.memberUpdate(conn, memberId, memberPw, memberNo);
+		
+		if(result > 0) commit(conn);
+		else 			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
+	public List<MemoList> selectByMemberNo(int memberNo) throws Exception {
+	    
+		Connection conn = getConnection();
+		List<MemoList> list = memoDAO.selectByMemberNo(conn, memberNo);
+
+	    close(conn);
+	    return list;
+	}
+
+
 
 

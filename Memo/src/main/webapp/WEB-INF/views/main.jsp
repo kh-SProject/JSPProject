@@ -27,9 +27,9 @@
             남습니다.
          </p>
       </div>
-
+     
          <button id="addBtn">글쓰기</button>
-
+     
    </div>
 
    <div class="container">
@@ -48,42 +48,44 @@
          <tbody>
             <c:forEach var="memo" items="${memoList}">
                <tr>
-                  <td>${memo.no}</td>
 
-                  <!-- 제목 -->
-                  <td><c:choose>
-                        <c:when test="${not empty sessionScope.loginMember}">
-                           <a href="memo/detail?no=${memo.no}" target="_blank">${memo.title}</a>
-
-                        </c:when>
-                        <c:otherwise>
-                             ${memo.title}
-                           </c:otherwise>
-                     </c:choose></td>
-
-                  <!-- 내용 -->
-                  <td><c:choose>
-                        <c:when test="${not empty sessionScope.loginMember}">
-              ${memo.detail}
-            </c:when>
-                        <c:otherwise>-</c:otherwise>
-                     </c:choose></td>
-
-                  <!-- 작성일 -->
-                  <td><c:choose>
-                        <c:when test="${not empty sessionScope.loginMember}">
-              ${memo.date1}
-            </c:when>
-                        <c:otherwise>-</c:otherwise>
-                     </c:choose></td>
-
-                  <!-- 수정일 -->
-                  <td><c:choose>
-                        <c:when test="${not empty sessionScope.loginMember}">
-              ${memo.date2}
-            </c:when>
-                        <c:otherwise>-</c:otherwise>
-                     </c:choose></td>
+					<td>${memo.memoNo}</td>
+					<td>
+					  <c:choose>
+					    <c:when test="${not empty sessionScope.member}">
+					      <a href="memo/detail?no=${memo.memoNo}" target="_blank">${memo.memoTitle}</a>
+					    </c:when>
+					    <c:otherwise>
+					      ${memo.memoTitle}
+					    </c:otherwise>
+					  </c:choose>
+					</td>
+					
+					<td>
+					  <c:choose>
+					    <c:when test="${not empty sessionScope.member}">
+					      ${memo.memoDetail}
+					    </c:when>
+					    <c:otherwise>-</c:otherwise>
+					  </c:choose>
+					</td>
+					
+					<td>
+					  <c:choose>
+					    <c:when test="${not empty sessionScope.member}">
+					      ${memo.memoDate}
+					    </c:when>
+					    <c:otherwise>-</c:otherwise>
+					  </c:choose>
+					</td>
+					
+					<td>
+					  <c:choose>
+					    <c:when test="${not empty sessionScope.member}">
+					      ${memo.memoUpdate}
+					    </c:when>
+					    <c:otherwise>-</c:otherwise>
+					  </c:choose></td>
                </tr>
             </c:forEach>
          </tbody>
@@ -110,13 +112,17 @@
          <c:if test="${not empty sessionScope.member}">
 
             <div id="welcomeMessage">
-               <p class="welcome">${sessionScope.member.memberName}님,환영합니다!</p>
-               <p>즐겁고 행복한 순간이 있다면 메모로 남겨보세요 :)</p>
-               <form action="/logout" method="post">
-                  <button type="submit">로그아웃</button>
-               </form>
-            </div>
 
+					<p class="welcome">${sessionScope.member.memberName}님,환영합니다!</p>
+					<p>즐겁고 행복한 순간이 있다면 메모로 남겨보세요 :)</p>
+					<form action="/logout" method="post">
+						<button type="submit">로그아웃</button>
+					</form>
+
+					<form action="/member/update">					
+						<button type="submit">회원정보수정</button>
+					</form>
+				</div>
          </c:if>
       </div>
    </div>
@@ -135,7 +141,6 @@
       <%-- message를 한 번만 출력하고 제거 --%>
       <c:remove var="message" scope="session"></c:remove>
    </c:if>
-
 
    <script src="/resources/js/main.js"></script>
 </body>

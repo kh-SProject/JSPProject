@@ -1,5 +1,7 @@
 package edu.kh.memo.model.service;
 
+import java.util.List;
+
 import edu.kh.memo.model.dto.Member;
 import edu.kh.memo.model.dto.MemoList;
 
@@ -15,5 +17,11 @@ public interface MemoService {
 	int memoDelete(int memo) throws Exception;
 
 	int memoAdd(String memoTitle, String memoDetail) throws Exception;
+
+
+	int memberUpdate(String memberId, String memberPw, int memberNo) throws Exception;
+
+	List<MemoList> selectByMemberNo(int memberNo) throws Exception;
+
 
 }

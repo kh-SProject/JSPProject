@@ -1,17 +1,19 @@
 package edu.kh.memo.model.dao;
 
+import static edu.kh.memo.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import edu.kh.memo.common.JDBCTemplate;
 import edu.kh.memo.model.dto.Member;
 import edu.kh.memo.model.dto.MemoList;
-
-import static edu.kh.memo.common.JDBCTemplate.*;
 
 public class MemoDAOImpl implements MemoDAO {
 
@@ -122,25 +124,34 @@ public class MemoDAOImpl implements MemoDAO {
    @Override
    public MemoList selectOne(Connection conn, int memoNo) throws Exception {
 
-      MemoList memo = null;
 
-      String sql = "SELECT * FROM TB_MEMO WHERE MEMO_NO = ?";
+	    MemoList memo = null;
 
-      PreparedStatement pstmt = conn.prepareStatement(sql);
-      pstmt.setInt(1, memoNo);
-      ResultSet rs = pstmt.executeQuery();
+	    try {
+	        String sql = prop.getProperty("selectOneMemo");
 
-      if (rs.next()) {
-         memo = MemoList.builder().memoNo(rs.getInt("MEMO_NO")).memoTitle(rs.getString("MEMO_TITLE"))
-               .memoDetail(rs.getString("MEMO_DETAIL")).memoDate(rs.getString("MEMO_DATE"))
-               .memoUpdate(rs.getString("MEMO_UPDATE")).build();
-      }
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setInt(1, memoNo);
+	        rs = pstmt.executeQuery();
 
-      rs.close();
-      pstmt.close();
+	        if (rs.next()) {
+	            memo = MemoList.builder()
+	                .memoNo(rs.getInt("MEMO_NO"))
+	                .memoTitle(rs.getString("MEMO_TITLE"))
+	                .memoDetail(rs.getString("MEMO_DETAIL"))
+	                .memoDate(rs.getString("MEMO_DATE"))
+	                .memoUpdate(rs.getString("MEMO_UPDATE"))
+	                .build();
+	        }
 
-      return memo;
-   }
+	    } finally {
+	        close(rs);
+	        close(pstmt);
+	    }
+
+	    return memo;
+	}
+
 
    @Override
    public int memoDelete(Connection conn, int memo) throws Exception {
@@ -160,7 +171,6 @@ public class MemoDAOImpl implements MemoDAO {
       } finally {
 
          JDBCTemplate.close(pstmt);
-
       }
       return result;
    }
@@ -168,7 +178,9 @@ public class MemoDAOImpl implements MemoDAO {
    @Override
    public int memoAdd(Connection conn, String memoTitle, String memoDetail) throws Exception {
 
+
       int result = 0;
+
 
       try {
          String sql = prop.getProperty("memoAdd");
@@ -180,11 +192,65 @@ public class MemoDAOImpl implements MemoDAO {
 
          result = pstmt.executeUpdate();
 
-      } finally {
+		} finally {
 
-         close(pstmt);
-      }
+			close(pstmt);
+		}
 
-      return result;
-   }
+		return result;
+	}
+
+	@Override
+	public int memberUpdate(Connection conn, String memberId, String memberPw, int memberNo) throws Exception {
+
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("memberUpdate");
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, memberPw);
+			pstmt.setInt(3, memberNo);
+
+      result = pstmt.executeUpdate();
+      
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+      
+	public List<MemoList> selectByMemberNo(Connection conn, int memberNo) throws Exception {
+		  List<MemoList> list = new ArrayList<>();
+
+		    try {
+		        String sql = prop.getProperty("selectByMemberNo");
+
+		        pstmt = conn.prepareStatement(sql);
+		        pstmt.setInt(1, memberNo);
+
+		        rs = pstmt.executeQuery();
+
+		        while (rs.next()) {
+		            MemoList memo = MemoList.builder()
+		                .memoNo(rs.getInt("MEMO_NO"))
+		                .memoTitle(rs.getString("MEMO_TITLE"))
+		                .memoDetail(rs.getString("MEMO_DETAIL"))
+		                .memoDate(rs.getString("MEMO_DATE"))
+		                .memoUpdate(rs.getString("MEMO_UPDATE"))
+		                .build();
+
+		            list.add(memo);
+		        }
+
+		    } finally {
+		        close(rs);
+		        close(pstmt);
+		    }
+		    return list;
+	}
+
 }

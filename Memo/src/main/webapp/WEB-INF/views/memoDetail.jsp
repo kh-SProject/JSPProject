@@ -2,51 +2,40 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <title>메모 상세 보기</title>
   <link rel="stylesheet" href="/resources/css/memoDetail.css">
 </head>
 <body>
-  <div class="memo-detail-container">
-    <div class="memo-title">${memo.memoTitle}</div>
 
-    <div class="memo-content">
-      ${memo.memoDetail}
-    </div>
+  <div class="detail-container">
+    <h2>📄 메모 상세</h2>
 
-    <div class="memo-buttons">
-      <!-- 수정 -->
-      <form action="/memo/update" method="get">
+    <table class="memo-table">
+      <tr><th>번호</th><td>${memo.memoNo}</td></tr>
+      <tr><th>제목</th><td>${memo.memoTitle}</td></tr>
+      <tr><th>내용</th><td>${memo.memoDetail}</td></tr>
+      <tr><th>작성일</th><td>${memo.memoDate}</td></tr>
+      <tr><th>수정일</th><td>${memo.memoUpdate}</td></tr>
+    </table>
+
+    <div class="button-box">
+      <form action="/memo/edit" method="get">
         <input type="hidden" name="no" value="${memo.memoNo}">
-        <button type="submit">수정</button>
+        <button type="submit" class="edit-btn">✏ 수정</button>
       </form>
 
-      <!-- 삭제 -->
-      <form action="/memo/delete" method="post" onsubmit="return confirmDelete();">
+      <form action="/memo/delete" method="post" onsubmit="return confirm('정말 삭제할까요?');">
         <input type="hidden" name="no" value="${memo.memoNo}">
-        <button type="submit">삭제</button>
-      </form>
-
-      <!-- 등록 -->
-      <form action="/memo/insert" method="get">
-        <button type="submit" class="primary">등록</button>
+        <button type="submit" class="delete-btn">🗑 삭제</button>
       </form>
     </div>
   </div>
 
   <script src="/resources/js/memoDetail.js"></script>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>memo detail</title>
-</head>
-<body>
-
 </body>
 </html>
+

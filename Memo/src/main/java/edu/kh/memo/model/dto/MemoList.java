@@ -9,9 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Member {
-	private int memberNo;
-	private String memberId;
-	private String memberPw;
-	private String memberName;
+public class MemoList {
+	private int memoNo;
+	private String memoTitle;
+	private String memoDetail;
+	private String memoDate;
+	private String memoUpdate;
 }

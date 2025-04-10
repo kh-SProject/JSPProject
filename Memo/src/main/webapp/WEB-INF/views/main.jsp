@@ -14,7 +14,6 @@
 </head>
 <body>
 
-
    <header>MEMO IS BEST</header>
 
    <div class="banner">
@@ -114,12 +113,16 @@
          <c:if test="${not empty sessionScope.member}">
 
             <div id="welcomeMessage">
-               <p class="welcome">${sessionScope.member.memberName}님,환영합니다!</p>
-               <p>즐겁고 행복한 순간이 있다면 메모로 남겨보세요 :)</p>
-               <form action="/logout" method="post">
-                  <button type="submit">로그아웃</button>
-               </form>
-            </div>
+					<p class="welcome">${sessionScope.member.memberName}님,환영합니다!</p>
+					<p>즐겁고 행복한 순간이 있다면 메모로 남겨보세요 :)</p>
+					<form action="/logout" method="post">
+						<button type="submit">로그아웃</button>
+					</form>
+
+					<form action="/member/update">					
+						<button type="submit">회원정보수정</button>
+					</form>
+				</div>
 
          </c:if>
       </div>

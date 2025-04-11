@@ -116,7 +116,7 @@
 					<p class="welcome">${sessionScope.member.memberName}님,환영합니다!</p>
 					<p>즐겁고 행복한 순간이 있다면 메모로 남겨보세요 :)</p>
 					<form action="/logout" method="post">
-						<button type="submit">로그아웃</button>
+						<button type="submit" id="logout">로그아웃</button>
 					</form>
 
 					<form action="/member/update">					
@@ -141,7 +141,7 @@
       <%-- message를 한 번만 출력하고 제거 --%>
       <c:remove var="message" scope="session"></c:remove>
    </c:if>
-
+   
    <script src="/resources/js/main.js"></script>
 </body>
 </html>

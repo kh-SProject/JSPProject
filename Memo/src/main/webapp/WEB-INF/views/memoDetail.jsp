@@ -41,3 +41,4 @@
   <script src="/resources/js/memoDetail.js"></script>
 </body>
 </html>
+

@@ -15,6 +15,7 @@ public class MemoList {
 	private String memoDetail;
 	private String memoDate;
 	private String memoUpdate;
+	private int memberNo;
 	
 	
 	  public int getMemoNo() {

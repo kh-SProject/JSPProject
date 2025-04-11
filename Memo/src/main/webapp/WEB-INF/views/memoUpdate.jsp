@@ -66,13 +66,18 @@
     </div>
     <div class="col">
       <label>수정일</label>
-      <input type="text" class="form-control" value="${memoList. memoUpdate}"  readonly>
+      <input type="text" class="form-control" value="${memoList.memoUpdate}"  readonly>
+
     </div>
   </div>
 
   <div class="btn-space mt-4">
     <button class="btn btn-success" id="updateBtn">수정</button>
+
+    <button class="btn btn-danger" id="deleteBtn">삭제</button>
+
     <button class="btn btn-danger">삭제</button>
+
   </div>
 </div>
 

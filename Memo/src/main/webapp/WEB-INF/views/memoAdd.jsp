@@ -12,13 +12,13 @@
 </head>
 <body>
   <div class="container">
-    <label for="title">제목</label>
-    <input type="text" id="title" name="title">
+  	<form action="/memo/add" method="post">
+	    <label for="title">제목</label>
+	    <input type="text" id="title" name="memoTitle">
 
-    <label for="content">내용</label>
-    <textarea id="content" name="content"></textarea>
+	    <label for="memoDetail">내용</label>
+	    <textarea id="memoDetail" name="memoDetail"></textarea>
 
-	<form action="/memo/add" method="post">
 	 <button class="submit-btn">등록</button>
 	</form>
    

@@ -30,7 +30,7 @@
 	
 	<entry key="memoAdd">
 		INSERT INTO TB_MEMO
-		VALUES(SEQ_TODO_NO.NEXTVAL, ?, ?, DEFAULT, DEFAULT)
+        VALUES(SEQ_MEMO_NO.NEXTVAL, ?, ?, DEFAULT, DEFAULT, ?)
 	</entry>
 
 	<entry key="selectByMemberNo">

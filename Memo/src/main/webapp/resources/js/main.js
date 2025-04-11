@@ -21,9 +21,21 @@ function loadMemos() {
 
 window.onload = loadMemos;
 
-const addBtn = document.querySelector("#addBtn") 
-
+/*
 addBtn.addEventListener("click", ()=>{
-  location.href = "/memo/addForm" ;
+	const addBtn = document.querySelector("#addBtn") 
+	location.href = "/memo/addForm" ;
 });
 
+*/
+
+const addBtn = document.querySelector("#addBtn");
+
+addBtn.addEventListener("click", () => {
+  if (isLoggedIn) {
+    window.location.href = "/memo/addForm";
+  } else {
+    alert("로그인 후 이용 가능합니다.");
+    window.location.href = "/";
+  }
+});

@@ -35,6 +35,7 @@
    <div class="container">
 
       <!-- 메모 리스트 -->
+   <div class="table-wrapper">
       <table>
          <thead>
             <tr>
@@ -90,6 +91,7 @@
             </c:forEach>
          </tbody>
       </table>
+   </div>
 
       <!-- 로그인 / 환영 메시지 -->
       <div id="authSection" class="login-area">
@@ -104,7 +106,7 @@
 
                </form>
 
-               <button onclick="location.href='/signup'">회원가입</button>
+               <button onclick="location.href='/signup'" id="memberBtn">회원가입</button>
 
             </div>
          </c:if>
@@ -116,11 +118,13 @@
 					<p class="welcome">${sessionScope.member.memberName}님,환영합니다!</p>
 					<p>즐겁고 행복한 순간이 있다면 메모로 남겨보세요 :)</p>
 					<form action="/logout" method="post">
+
 						<button type="submit" id="logout">로그아웃</button>
+
 					</form>
 
 					<form action="/member/update">					
-						<button type="submit">회원정보수정</button>
+						<button type="submit" id="memberEditBtn">회원정보수정</button>
 					</form>
 				</div>
          </c:if>
@@ -141,7 +145,11 @@
       <%-- message를 한 번만 출력하고 제거 --%>
       <c:remove var="message" scope="session"></c:remove>
    </c:if>
-   
+
+	<script>
+  	const isLoggedIn = ${not empty sessionScope.member}; // true 또는 false로 넘어옴
+	</script>
+
    <script src="/resources/js/main.js"></script>
 </body>
 </html>

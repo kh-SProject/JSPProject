@@ -15,8 +15,6 @@ import jakarta.servlet.http.HttpServletResponse;
 public class MemoUpdateServlet extends HttpServlet {
 
 
-			MemoList memoList = service.selectOne(memoNo);
-
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

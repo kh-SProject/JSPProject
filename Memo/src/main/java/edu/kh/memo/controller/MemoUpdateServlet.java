@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class MemoUpdateServlet extends HttpServlet {
 
 
+			MemoList memoList = service.selectOne(memoNo);
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -49,4 +50,42 @@ public class MemoUpdateServlet extends HttpServlet {
 	
 	}
 	
+      	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+	try {
+		
+		String memoTitle = req.getParameter("memoTitle");
+		String memoDetail = req.getParameter("memoDetail");
+		int memoNo = Integer.parseInt(req.getParameter("memoNo"));
+		
+		MemoService service = new MemoServiceImpl();
+		int result = service.memoUpdate(memoNo, memoTitle, memoDetail);
+		
+		String url = null;
+		String message = null;
+		
+		if (result > 0) {
+			
+			url = "/memo/detail?memoNo=" + memoNo;
+			message = "수정 되었습니다.";
+			
+		} else { 
+			url = "/memo/update?todoNo=" + memoNo;
+			message = "수정 실패";				
+			
+		}
+		
+		req.getSession().setAttribute("message", message);
+		
+		resp.sendRedirect("/");
+		
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+	
+	
+	}
+      
+      
 }

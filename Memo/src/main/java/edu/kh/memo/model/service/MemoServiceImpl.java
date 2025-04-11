@@ -61,6 +61,7 @@ public class MemoServiceImpl implements MemoService {
 	    return memo;
 	}
 
+	@Override
 	public int memoDelete(int memo) throws Exception {
 		Connection conn = getConnection();
 
@@ -77,24 +78,25 @@ public class MemoServiceImpl implements MemoService {
 	}
 		
 
-	public int memoAdd(String memoTitle, String memoDetail) throws Exception {
+	@Override
+    public int memoAdd(String memoTitle, String memoDetail, int memberNo) throws Exception {
 
-		Connection conn = getConnection();
+        Connection conn = getConnection();
 
-		int result = memoDAO.memoAdd(conn, memoTitle, memoDetail);
+        // 회원 번호도 함께 DAO로 전달
+        int result = memoDAO.memoAdd(conn, memoTitle, memoDetail, memberNo);
 
-		if (result > 0)
-			commit(conn);
-		else
-			rollback(conn);
+        if (result > 0)
+            commit(conn);
+        else
+            rollback(conn);
 
-		close(conn);
+        close(conn);
 
-		return result;
-	}
+        return result;
+    }
 
 	@Override
-
 	public int memberUpdate(String memberId, String memberPw, int memberNo) throws Exception {
 
 		Connection conn = getConnection();
@@ -109,7 +111,7 @@ public class MemoServiceImpl implements MemoService {
 		return result;
 	}
 
-
+	@Override
 	public List<MemoList> selectByMemberNo(int memberNo) throws Exception {
 	    
 		Connection conn = getConnection();
@@ -121,4 +123,5 @@ public class MemoServiceImpl implements MemoService {
 
 }
 
+}
 

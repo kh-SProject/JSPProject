@@ -20,7 +20,7 @@ public interface MemoDAO {
 
 	int memoDelete(Connection conn, int memo) throws Exception;
 
-	int memoAdd(Connection conn, String memoTitle, String memoDetail) throws Exception;
+	int memoAdd(Connection conn, String memoTitle, String memoDetail, int memberNo) throws Exception;
 
 
 	int memberUpdate(Connection conn, String memberId, String memberPw, int memberNo) throws Exception;

@@ -57,7 +57,7 @@ public class MemoUpdateServlet extends HttpServlet {
       
       String memoTitle = req.getParameter("memoTitle");
       String memoDetail = req.getParameter("memoDetail");
-      int memoNo = Integer.parseInt(req.getParameter("memoNo"));
+      int memoNo = Integer.parseInt(req.getParameter("no"));
       
       MemoService service = new MemoServiceImpl();
       int result = service.memoUpdate(memoNo, memoTitle, memoDetail);
@@ -67,18 +67,18 @@ public class MemoUpdateServlet extends HttpServlet {
       
       if (result > 0) {
          
-         url = "/memo/detail?memoNo=" + memoNo;
+         url = "/memo/detail?no=" + memoNo;
          message = "수정 되었습니다.";
          
       } else { 
-         url = "/memo/update?todoNo=" + memoNo;
+         url = "/memo/edit?no=" + memoNo;
          message = "수정 실패";            
          
       }
       
       req.getSession().setAttribute("message", message);
       
-      resp.sendRedirect("/");
+      resp.sendRedirect(url);
       
    }catch(Exception e) {
       e.printStackTrace();

@@ -76,9 +76,9 @@
   
 <!--     <button class="btn btn-success" id="updateBtn">수정</button> -->
 
-      <form action="/memo/edit" method="get">
+      <form action="/memo/edit" method="post">
         <input type="hidden" name="no" value="${memoList.memoNo}">
-        <button type="submit" class="edit-btn" id="updateBtn">✏ 수정</button>
+        <button type="submit" class="edit-btn" id="updateBtn">✏ 수정완료</button>
       </form>
 
       <form action="/memo/delete" method="get">

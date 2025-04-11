@@ -176,29 +176,22 @@ public class MemoDAOImpl implements MemoDAO {
    }
 
    @Override
-   public int memoAdd(Connection conn, String memoTitle, String memoDetail) throws Exception {
-
-
-      int result = 0;
-
-
-      try {
-         String sql = prop.getProperty("memoAdd");
-
-         pstmt = conn.prepareStatement(sql);
-
-         pstmt.setString(1, memoTitle);
-         pstmt.setString(2, memoDetail);
-
-         result = pstmt.executeUpdate();
-
-		} finally {
-
-			close(pstmt);
-		}
-
-		return result;
-	}
+   public int memoAdd(Connection conn, String memoTitle, String memoDetail, int memberNo) throws Exception {
+       int result = 0;
+       try {
+           String sql = prop.getProperty("memoAdd");
+           
+           pstmt = conn.prepareStatement(sql);
+           pstmt.setString(1, memoTitle);
+           pstmt.setString(2, memoDetail);
+           pstmt.setInt(3, memberNo); // 회원 번호 설정
+           
+           result = pstmt.executeUpdate();
+       } finally {
+           close(pstmt);
+       }
+       return result;
+   }
 
 	@Override
 	public int memberUpdate(Connection conn, String memberId, String memberPw, int memberNo) throws Exception {

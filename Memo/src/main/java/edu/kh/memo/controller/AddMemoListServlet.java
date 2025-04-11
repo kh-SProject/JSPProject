@@ -2,6 +2,7 @@ package edu.kh.memo.controller;
 
 import java.io.IOException;
 
+import edu.kh.memo.model.dto.Member;
 import edu.kh.memo.model.service.MemoService;
 import edu.kh.memo.model.service.MemoServiceImpl;
 import jakarta.servlet.ServletException;
@@ -22,18 +23,22 @@ public class AddMemoListServlet extends HttpServlet {
 			
 			String memoTitle = req.getParameter("memoTitle");
 			String memoDetail = req.getParameter("memoDetail");
-			
-			int result = service.memoAdd(memoTitle, memoDetail);
-			
-			String message = null;
-			
-			if(result > 0 ) message = "추가 성공!";
-			else message = "추가 실패";
-			
+
 			HttpSession session = req.getSession();
-			session.setAttribute("message", message);
+			Member loginMember = (Member) session.getAttribute("member");
 			
-			resp.sendRedirect("/");
+			int memberNo = loginMember.getMemberNo();
+
+            // 회원 번호도 함께 서비스로 전달
+            int result = service.memoAdd(memoTitle, memoDetail, memberNo);
+
+            String message = null;
+
+            if (result > 0) message = "추가 성공!";
+            else message = "추가 실패";
+
+            session.setAttribute("message", message);
+            resp.sendRedirect("/");
 			
 		} catch (Exception e) {
 			e.printStackTrace();

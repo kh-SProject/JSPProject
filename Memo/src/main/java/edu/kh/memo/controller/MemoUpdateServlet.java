@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/memo/update")
+@WebServlet("/memo/edit")
 public class MemoUpdateServlet extends HttpServlet {
 
 	@Override

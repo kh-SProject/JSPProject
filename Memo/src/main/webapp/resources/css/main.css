@@ -105,7 +105,31 @@ th {
   margin-right: 10px;
 }
 
-.login-area button {
+#loginBtn {
+	padding: 10px 20px;
+  background-color: white;
+  border: 1px solid royalblue;
+  color: royalblue;
+  cursor: pointer;
+}
+
+#memberBtn {
+  padding: 10px 20px;
+  background-color: royalblue;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+#logoutBtn {
+	padding: 10px 20px;
+  background-color: white;
+  border: 1px solid royalblue;
+  color: royalblue;
+  cursor: pointer;
+}
+
+#memberEditBtn {
   padding: 10px 20px;
   background-color: royalblue;
   border: none;
@@ -116,4 +140,41 @@ th {
 .welcome {
   font-weight: bold;
   font-size: 1.1rem;
+}
+
+table td:nth-child(2) { 
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  max-width: 100px; 
+}
+
+/* Detail 스타일 */
+table td:nth-child(3) {
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  max-width: 300px; 
+}
+
+.table-wrapper {
+  max-height: 250px; /* 5개 행의 높이에 맞춰 적절한 값 설정 (조절 가능) */
+  overflow-y: auto; /* 세로 스크롤 활성화 */
+}
+
+.table-wrapper table {
+  width: 100%; /* 테이블이 wrapper의 너비를 채우도록 */
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+.table-wrapper th,
+.table-wrapper td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.table-wrapper th {
+  background-color: #f4f4f4;
 }

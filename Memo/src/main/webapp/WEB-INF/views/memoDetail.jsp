@@ -26,6 +26,10 @@
         <input type="hidden" name="no" value="${memo.memoNo}">
         <button type="submit" class="edit-btn">✏ 수정</button>
       </form>
+      
+      <form action="/main" method="get">
+          <button type="submit" class="list-btn">📃 목록으로</button>
+        </form>
 
       <form action="/memo/delete" method="get">
         <input type="hidden" name="no" value="${memo.memoNo}">

@@ -118,7 +118,9 @@
 					<p class="welcome">${sessionScope.member.memberName}님,환영합니다!</p>
 					<p>즐겁고 행복한 순간이 있다면 메모로 남겨보세요 :)</p>
 					<form action="/logout" method="post">
-						<button type="submit" id="logoutBtn">로그아웃</button>
+
+						<button type="submit" id="logout">로그아웃</button>
+
 					</form>
 
 					<form action="/member/update">					
@@ -147,6 +149,7 @@
 	<script>
   	const isLoggedIn = ${not empty sessionScope.member}; // true 또는 false로 넘어옴
 	</script>
+
    <script src="/resources/js/main.js"></script>
 </body>
 </html>

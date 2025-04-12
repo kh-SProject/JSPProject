@@ -36,10 +36,10 @@ header {
 
 .banner .text-box {
   position: absolute;
-  bottom: 30%; 
+  bottom: 40%; 
   right: 10%;
   text-align: right;
-  color: #111; 
+  color: #111; /* 기본 글자색 */
 }
 
 .banner .text-box h2 {
@@ -53,6 +53,19 @@ header {
   margin-top: 10px;
   font-size: 1rem;
   color: #333;
+}
+
+#addBtn {
+  position: absolute;
+  bottom: 30%; 
+  right: 10%;
+  text-align: right;
+
+  padding: 10px 20px;
+  background-color: royalblue;
+  border: none;
+  color: white;
+  cursor: pointer;
 }
 
 .highlight {
@@ -93,7 +106,7 @@ th {
 }
 
 #loginBtn {
-	padding: 10px 20px;
+   padding: 10px 20px;
   background-color: white;
   border: 1px solid royalblue;
   color: royalblue;
@@ -109,7 +122,7 @@ th {
 }
 
 #logoutBtn {
-	padding: 10px 20px;
+   padding: 10px 20px;
   background-color: white;
   border: 1px solid royalblue;
   color: royalblue;
@@ -143,6 +156,8 @@ table td:nth-child(3) {
   text-overflow: ellipsis; 
   max-width: 300px; 
 }
+
+/* 테이블 스크롤 추가 */
 
 .table-wrapper {
   max-height: 250px; /* 5개 행의 높이에 맞춰 적절한 값 설정 (조절 가능) */

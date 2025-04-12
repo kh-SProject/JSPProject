@@ -14,20 +14,20 @@ import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/memo/add")
 public class AddMemoListServlet extends HttpServlet {
-	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		try {
-			MemoService service = new MemoServiceImpl();
-			
-			String memoTitle = req.getParameter("memoTitle");
-			String memoDetail = req.getParameter("memoDetail");
+   
+   @Override
+   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+      
+      try {
+         MemoService service = new MemoServiceImpl();
+         
+         String memoTitle = req.getParameter("memoTitle");
+         String memoDetail = req.getParameter("memoDetail");
 
-			HttpSession session = req.getSession();
-			Member loginMember = (Member) session.getAttribute("member");
-			
-			int memberNo = loginMember.getMemberNo();
+         HttpSession session = req.getSession();
+         Member loginMember = (Member) session.getAttribute("member");
+         
+         int memberNo = loginMember.getMemberNo();
 
             // 회원 번호도 함께 서비스로 전달
             int result = service.memoAdd(memoTitle, memoDetail, memberNo);
@@ -39,11 +39,11 @@ public class AddMemoListServlet extends HttpServlet {
 
             session.setAttribute("message", message);
             resp.sendRedirect("/");
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
-	
+         
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+      
+   }
+   
 }

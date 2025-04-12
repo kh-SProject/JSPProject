@@ -26,16 +26,19 @@
         <input type="hidden" name="no" value="${memo.memoNo}">
         <button type="submit" class="edit-btn">✏ 수정</button>
       </form>
+      
+      <form action="/main" method="get">
+          <button type="submit" class="list-btn">📃 목록으로</button>
+        </form>
 
-      <form action="/memo/delete" method="post" onsubmit="return confirm('정말 삭제할까요?');">
+      <form action="/memo/delete" method="get">
         <input type="hidden" name="no" value="${memo.memoNo}">
-        <button type="submit" class="delete-btn">🗑 삭제</button>
+        <button id="deleteBtn">🗑 삭제</button>
       </form>
     </div>
   </div>
 
   <script src="/resources/js/memoDetail.js"></script>
-
 </body>
 </html>
 

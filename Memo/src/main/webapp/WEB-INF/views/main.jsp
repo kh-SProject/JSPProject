@@ -50,43 +50,43 @@
             <c:forEach var="memo" items="${memoList}">
                <tr>
 
-					<td>${memo.memoNo}</td>
-					<td>
-					  <c:choose>
-					    <c:when test="${not empty sessionScope.member}">
-					      <a href="memo/detail?no=${memo.memoNo}" target="_blank">${memo.memoTitle}</a>
-					    </c:when>
-					    <c:otherwise>
-					      ${memo.memoTitle}
-					    </c:otherwise>
-					  </c:choose>
-					</td>
-					
-					<td>
-					  <c:choose>
-					    <c:when test="${not empty sessionScope.member}">
-					      ${memo.memoDetail}
-					    </c:when>
-					    <c:otherwise>-</c:otherwise>
-					  </c:choose>
-					</td>
-					
-					<td>
-					  <c:choose>
-					    <c:when test="${not empty sessionScope.member}">
-					      ${memo.memoDate}
-					    </c:when>
-					    <c:otherwise>-</c:otherwise>
-					  </c:choose>
-					</td>
-					
-					<td>
-					  <c:choose>
-					    <c:when test="${not empty sessionScope.member}">
-					      ${memo.memoUpdate}
-					    </c:when>
-					    <c:otherwise>-</c:otherwise>
-					  </c:choose></td>
+               <td>${memo.memoNo}</td>
+               <td>
+                 <c:choose>
+                   <c:when test="${not empty sessionScope.member}">
+                     <a href="memo/detail?no=${memo.memoNo}" target="_blank">${memo.memoTitle}</a>
+                   </c:when>
+                   <c:otherwise>
+                     ${memo.memoTitle}
+                   </c:otherwise>
+                 </c:choose>
+               </td>
+               
+               <td>
+                 <c:choose>
+                   <c:when test="${not empty sessionScope.member}">
+                     ${memo.memoDetail}
+                   </c:when>
+                   <c:otherwise>-</c:otherwise>
+                 </c:choose>
+               </td>
+               
+               <td>
+                 <c:choose>
+                   <c:when test="${not empty sessionScope.member}">
+                     ${memo.memoDate}
+                   </c:when>
+                   <c:otherwise>-</c:otherwise>
+                 </c:choose>
+               </td>
+               
+               <td>
+                 <c:choose>
+                   <c:when test="${not empty sessionScope.member}">
+                     ${memo.memoUpdate}
+                   </c:when>
+                   <c:otherwise>-</c:otherwise>
+                 </c:choose></td>
                </tr>
             </c:forEach>
          </tbody>
@@ -115,16 +115,16 @@
 
             <div id="welcomeMessage">
 
-					<p class="welcome">${sessionScope.member.memberName}님,환영합니다!</p>
-					<p>즐겁고 행복한 순간이 있다면 메모로 남겨보세요 :)</p>
-					<form action="/logout" method="post">
-						<button type="submit" id="logoutBtn">로그아웃</button>
-					</form>
+               <p class="welcome">${sessionScope.member.memberName}님,환영합니다!</p>
+               <p>즐겁고 행복한 순간이 있다면 메모로 남겨보세요 :)</p>
+               <form action="/logout" method="post">
+                  <button type="submit" id="logoutBtn">로그아웃</button>
+               </form>
 
-					<form action="/member/update">					
-						<button type="submit" id="memberEditBtn">회원정보수정</button>
-					</form>
-				</div>
+               <form action="/member/update">               
+                  <button type="submit" id="memberEditBtn">회원정보수정</button>
+               </form>
+            </div>
          </c:if>
       </div>
    </div>
@@ -144,9 +144,9 @@
       <c:remove var="message" scope="session"></c:remove>
    </c:if>
 
-	<script>
-  	const isLoggedIn = ${not empty sessionScope.member}; // true 또는 false로 넘어옴
-	</script>
+   <script>
+     const isLoggedIn = ${not empty sessionScope.member}; // true 또는 false로 넘어옴
+   </script>
    <script src="/resources/js/main.js"></script>
 </body>
 </html>

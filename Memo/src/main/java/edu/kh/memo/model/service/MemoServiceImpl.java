@@ -49,7 +49,7 @@ public class MemoServiceImpl implements MemoService {
 
 	}
 
-	@Override
+	
 	public MemoList selectOne(int memoNo) throws Exception {
 		
 	    Connection conn = getConnection();
@@ -122,5 +122,6 @@ public class MemoServiceImpl implements MemoService {
 	}
 
 }
+
 
 

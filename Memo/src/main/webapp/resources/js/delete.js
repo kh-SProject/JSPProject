@@ -3,5 +3,5 @@ deleteBtn.addEventListener("click", () => {
 
   if(! confirm("정말 삭제하시겠습니까?")) return;
 
-  location.href = "/main/delete?memoNo" + memoNo;
+  location.href = "/memo/delete?memoNo=" + memoNo;
 });

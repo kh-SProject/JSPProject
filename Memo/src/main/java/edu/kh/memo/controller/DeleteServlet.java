@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/main/delete")
+@WebServlet("/memo/delete")
 public class DeleteServlet extends HttpServlet {
 
 	@Override
@@ -21,7 +21,7 @@ public class DeleteServlet extends HttpServlet {
 
 			MemoService service = new MemoServiceImpl();
 
-			int memo = Integer.parseInt(req.getParameter("memoNo"));
+			int memo = Integer.parseInt(req.getParameter("no"));
 
 			int result = service.memoDelete(memo);
 
@@ -39,7 +39,7 @@ public class DeleteServlet extends HttpServlet {
 			}
 
 			session.setAttribute("message", message);
-			resp.sendRedirect("/");
+			resp.sendRedirect("/main");
 
 		} catch (Exception e) {
 			e.printStackTrace();

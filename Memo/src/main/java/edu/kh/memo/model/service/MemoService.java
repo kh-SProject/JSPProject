@@ -22,5 +22,7 @@ public interface MemoService {
 
 	List<MemoList> selectByMemberNo(int memberNo) throws Exception;
 
+	int Addmember(String memberid, String memberPw, String memberName) throws Exception;
+
 
 }

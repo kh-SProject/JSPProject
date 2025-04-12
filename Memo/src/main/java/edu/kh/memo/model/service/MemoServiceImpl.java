@@ -121,6 +121,22 @@ public class MemoServiceImpl implements MemoService {
 	    return list;
 	}
 
+	@Override
+	public int Addmember(String memberid, String memberPw, String memberName) throws Exception {
+
+		Connection conn = getConnection();
+		
+		int result = memoDAO.Addmember(conn, memberid, memberPw, memberName);
+		
+		if(result > 0) commit(conn);
+		else 		rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
 }
 
 

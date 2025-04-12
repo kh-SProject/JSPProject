@@ -26,6 +26,7 @@ addBtn.addEventListener("click", ()=>{
 	const addBtn = document.querySelector("#addBtn") 
 	location.href = "/memo/addForm" ;
 });
+
 */
 
 const addBtn = document.querySelector("#addBtn");

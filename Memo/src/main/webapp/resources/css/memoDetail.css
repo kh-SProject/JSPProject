@@ -39,7 +39,29 @@ h2 {
 .button-box {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
 }
+
+/* 왼쪽에 붙은 수정 + 목록 버튼 */
+.button-box form:first-child,
+.button-box form:nth-child(2) {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+/* 삭제 버튼은 오른쪽 */
+#deleteBtn {
+  background-color: #f44336;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: auto; 
+}
+
 
 button {
   padding: 10px 20px;
@@ -49,13 +71,15 @@ button {
   cursor: pointer;
 }
 
+
 .edit-btn {
   background-color: #4caf50;
   color: white;
 }
 
-#deleteBtn {
-  background-color: #f44336;
+
+.list-btn {
+  background-color: #2196f3;
   color: white;
 }
 
@@ -68,3 +92,4 @@ button {
 .memo-table tr:nth-child(3) td {
   height: 200px; 
   vertical-align: top;
+}

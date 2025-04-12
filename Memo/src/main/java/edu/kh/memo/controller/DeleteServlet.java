@@ -15,13 +15,13 @@ import jakarta.servlet.http.HttpSession;
 public class DeleteServlet extends HttpServlet {
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
 
 			MemoService service = new MemoServiceImpl();
 
-			int memo = Integer.parseInt(req.getParameter("memoNo"));
+			int memo = Integer.parseInt(req.getParameter("no"));
 
 			int result = service.memoDelete(memo);
 
@@ -39,7 +39,7 @@ public class DeleteServlet extends HttpServlet {
 			}
 
 			session.setAttribute("message", message);
-			resp.sendRedirect("/");
+			resp.sendRedirect("/main");
 
 		} catch (Exception e) {
 			e.printStackTrace();

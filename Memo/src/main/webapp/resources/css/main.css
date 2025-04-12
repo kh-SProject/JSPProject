@@ -55,7 +55,7 @@ header {
   color: #333;
 }
 
-.banner button {
+#addBtn {
   position: absolute;
   bottom: 30%; 
   right: 10%;

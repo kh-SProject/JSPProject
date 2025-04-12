@@ -144,6 +144,8 @@ table td:nth-child(3) {
   max-width: 300px; 
 }
 
+/* 테이블 스크롤 */
+
 .table-wrapper {
   max-height: 250px; /* 5개 행의 높이에 맞춰 적절한 값 설정 (조절 가능) */
   overflow-y: auto; /* 세로 스크롤 활성화 */

@@ -28,7 +28,7 @@
          </p>
       </div>
      
-         <button>글쓰기</button>
+         <button id="addBtn">글쓰기</button>
      
    </div>
 

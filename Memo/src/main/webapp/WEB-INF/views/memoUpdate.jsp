@@ -8,7 +8,7 @@
   <title>메모 상세</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/resources/css/memoDetail.css">
-  <style>
+<style>
     body {
       background-color: #f8f9fa;
       padding: 2rem;
@@ -38,6 +38,7 @@
       width: 100%;
       margin-bottom: 1rem;
     }
+
   </style>
 </head>
 <body>

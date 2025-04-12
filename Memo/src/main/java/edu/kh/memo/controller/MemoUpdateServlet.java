@@ -51,37 +51,37 @@ public class MemoUpdateServlet extends HttpServlet {
    
    }
    
-   @Override
-   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       try {
-           req.setCharacterEncoding("UTF-8");
-           resp.setContentType("text/html; charset=UTF-8"); // 한글 깨짐 방지
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	    try {
+	        req.setCharacterEncoding("UTF-8");
+	        resp.setContentType("text/html; charset=UTF-8"); // 한글 깨짐 방지
 
-           String memoTitle = req.getParameter("memoTitle");
-           String memoDetail = req.getParameter("memoDetail");
-           int memoNo = Integer.parseInt(req.getParameter("no"));
+	        String memoTitle = req.getParameter("memoTitle");
+	        String memoDetail = req.getParameter("memoDetail");
+	        int memoNo = Integer.parseInt(req.getParameter("no"));
 
-           MemoService service = new MemoServiceImpl();
-           int result = service.memoUpdate(memoNo, memoTitle, memoDetail);
+	        MemoService service = new MemoServiceImpl();
+	        int result = service.memoUpdate(memoNo, memoTitle, memoDetail);
 
-           PrintWriter out = resp.getWriter(); // out 선언 필요!
+	        PrintWriter out = resp.getWriter(); // out 선언 필요!
 
-           if (result > 0) {
-               out.println("<script>");
-               out.println("alert('수정되었습니다.');");
-               out.println("location.href='/memo/detail?no=" + memoNo + "';");
-               out.println("</script>");
-           } else {
-               out.println("<script>");
-               out.println("alert('수정 실패ㅠㅠ');");
-               out.println("history.back();");
-               out.println("</script>");
-           }
+	        if (result > 0) {
+	            out.println("<script>");
+	            out.println("alert('수정되었습니다.');");
+	            out.println("location.href='/memo/detail?no=" + memoNo + "';");
+	            out.println("</script>");
+	        } else {
+	            out.println("<script>");
+	            out.println("alert('수정 실패ㅠㅠ');");
+	            out.println("history.back();");
+	            out.println("</script>");
+	        }
 
-       } catch (Exception e) {
-           e.printStackTrace();
-       }
-   }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
       
 }
  

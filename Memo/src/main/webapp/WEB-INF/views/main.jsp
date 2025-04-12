@@ -106,7 +106,9 @@
 
                </form>
 
-               <button onclick="location.href='/signup'" id="memberBtn">회원가입</button>
+				<form action="/signUp">
+          	     <button type="submit" id="memberBtn">회원가입</button>
+				</form>
 
             </div>
          </c:if>

@@ -49,4 +49,9 @@
 	    FROM TB_MEMO
 	    WHERE MEMO_NO = ?
 </entry>
+
+	<entry key="AddMember">
+		INSERT INTO TB_MEMBER
+        VALUES(SEQ_MEMBER_NO.NEXTVAL, ?, ?, ?)
+	</entry>
 </properties>

@@ -26,6 +26,8 @@ public interface MemoDAO {
 	int memberUpdate(Connection conn, String memberId, String memberPw, int memberNo) throws Exception;
 
 	List<MemoList> selectByMemberNo(Connection conn, int memberNo) throws Exception;
+
+	int Addmember(Connection conn, String memberid, String memberPw, String memberName) throws Exception;
 	
 
 

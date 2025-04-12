@@ -1,6 +1,7 @@
 package edu.kh.memo.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import edu.kh.memo.model.dto.MemoList;
 import edu.kh.memo.model.service.MemoService;
@@ -50,42 +51,36 @@ public class MemoUpdateServlet extends HttpServlet {
    
    }
    
-         @Override
-   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	    try {
+	        req.setCharacterEncoding("UTF-8");
+	        resp.setContentType("text/html; charset=UTF-8"); // 한글 깨짐 방지
 
-   try {
-      
-      String memoTitle = req.getParameter("memoTitle");
-      String memoDetail = req.getParameter("memoDetail");
-      int memoNo = Integer.parseInt(req.getParameter("no"));
-      
-      MemoService service = new MemoServiceImpl();
-      int result = service.memoUpdate(memoNo, memoTitle, memoDetail);
-      
-      String url = null;
-      String message = null;
-      
-      if (result > 0) {
-         
-         url = "/memo/detail?no=" + memoNo;
-         message = "수정 되었습니다.";
-         
-      } else { 
-         url = "/memo/edit?no=" + memoNo;
-         message = "수정 실패";            
-         
-      }
-      
-      req.getSession().setAttribute("message", message);
-      
-      resp.sendRedirect(url);
-      
-   }catch(Exception e) {
-      e.printStackTrace();
-   }
-   
-   
-   }
-      
+	        String memoTitle = req.getParameter("memoTitle");
+	        String memoDetail = req.getParameter("memoDetail");
+	        int memoNo = Integer.parseInt(req.getParameter("no"));
+
+	        MemoService service = new MemoServiceImpl();
+	        int result = service.memoUpdate(memoNo, memoTitle, memoDetail);
+
+	        PrintWriter out = resp.getWriter(); // out 선언 필요!
+
+	        if (result > 0) {
+	            out.println("<script>");
+	            out.println("alert('수정되었습니다.');");
+	            out.println("location.href='/memo/detail?no=" + memoNo + "';");
+	            out.println("</script>");
+	        } else {
+	            out.println("<script>");
+	            out.println("alert('수정 실패ㅠㅠ');");
+	            out.println("history.back();");
+	            out.println("</script>");
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
       
 }

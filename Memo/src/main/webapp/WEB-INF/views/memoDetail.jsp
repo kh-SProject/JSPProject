@@ -31,9 +31,9 @@
           <button type="submit" class="list-btn">📃 목록으로</button>
         </form>
 
-      <form action="/memo/delete" method="get">
-        <input type="hidden" name="no" value="${memo.memoNo}">
-        <button id="deleteBtn">🗑 삭제</button>
+      <form>
+        <input type="hidden" name="no" value="${memo.memoNo}" id="memo">
+        <button id="deleteBtn" type="button">🗑 삭제</button>
       </form>
     </div>
   </div>

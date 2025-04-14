@@ -78,10 +78,10 @@
           <button type="submit" class="edit-btn" id="updateBtn">✏ 수정완료</button>
         </form>
 
-        <form action="/memo/delete" method="get">
-          <input type="hidden" name="no" value="${memoList.memoNo}">
-          <button type="submit" id="deleteBtn">🗑 삭제</button>
-        </form>
+      <form>
+        <input type="hidden" name="no" value="${memoList.memoNo}" id="memo">
+        <button id="deleteBtn" type="button">🗑 삭제</button>
+      </form>
       </div>
     </form>
   </div>
